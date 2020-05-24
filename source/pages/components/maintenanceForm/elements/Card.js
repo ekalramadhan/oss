@@ -17,6 +17,10 @@ export default class Card extends Component {
                     <Text style={styles.value}>{this.props.data.namapelanggan}</Text>
                 </View>
                 <View style={styles.field}>
+                    <Text style={styles.key}>Nomor Handphone</Text>
+                    <Text style={styles.value}>{this.props.data.nomorhp}</Text>
+                </View>
+                <View style={styles.field}>
                     <Text style={styles.key}>Lokasi</Text>
                     <Text style={styles.value}>{this.props.data.lokasi}</Text>
                 </View>
