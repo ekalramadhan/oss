@@ -5,13 +5,14 @@ import moment from 'moment'
 // import { Linking } from 'expo';
 
 export default class Card extends Component {
-    handleDownloadForm = (link) => {
-        Linking.openURL(link)
+    handleDownloadForm = (kode) => {
+        Linking.openURL('http://taoss.xyz/oss/download/form/'+kode)
     }
-    handleDownloadConfig = (link) => {
-        Linking.openURL(link)
+    handleDownloadConfig = (kode) => {
+        Linking.openURL('http://taoss.xyz/oss/download/config/'+kode)
     }
     render() {
+        console.log(this.props.data)
         if (this.props.user) {
             return (
                 <View style={styles.card}>
@@ -57,12 +58,12 @@ export default class Card extends Component {
                         <Text style={styles.value}>{this.props.data.beam ? this.props.data.beam : '-'}</Text>
                     </View>
                     <View style={styles.field}>
-                        <TouchableOpacity style = {[styles.button, {marginTop: 10}]} onPress={() => this.handleDownloadForm(this.props.data.download_form)}>
+                        <TouchableOpacity style = {[styles.button, {marginTop: 10}]} onPress={() => this.handleDownloadForm(this.props.data.kode)}>
                             <Text style = {styles.buttonText}>Download Form</Text>    
                         </TouchableOpacity>
                     </View>
                     <View style={styles.field}>
-                        <TouchableOpacity style = {styles.button} onPress={() => this.handleDownloadConfig(this.props.data.download_config)}>
+                        <TouchableOpacity style = {styles.button} onPress={() => this.handleDownloadConfig(this.props.data.kode)}>
                             <Text style = {styles.buttonText}>Download Config</Text>    
                         </TouchableOpacity>
                     </View>
