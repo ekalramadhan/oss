@@ -38,6 +38,8 @@ const styles = StyleSheet.create({
     borderColor: '#a0aec0', 
     borderWidth: 1,
     borderRadius : 10,
+    paddingVertical:10,
+    paddingHorizontal:20,
   }
 });
 
@@ -91,6 +93,16 @@ getInitialState() {
       longitudeDelta: 0.0421,
     },
   };
+}
+
+getLocation = () => {
+  this.setState({     
+    region: {
+  latitude: this.state.latitude - 0.025,
+  longitude: this.state.longitude,
+  latitudeDelta: 0.0922,
+  longitudeDelta: 0.0421,
+}})
 }
 
 componentWillMount() {
