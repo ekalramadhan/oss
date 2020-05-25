@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 
 export default Sidebar = props => (
-    <ScrollView>
+    <ScrollView style={styles.container}>
         <ImageBackground 
             source = {require('../images/background_blue.png')} 
             style={{width: undefined, padding: 16, paddingTop: 48 }}
@@ -15,7 +15,7 @@ export default Sidebar = props => (
                 style = {styles.logo} />
         </ImageBackground>  
 
-        <View style={styles.container}>
+        <View>
             <DrawerNavigatorItems {...props}/>
         </View>
     </ScrollView>
@@ -25,7 +25,9 @@ export default Sidebar = props => (
 const styles = StyleSheet.create({
     container: {
         flexGrow: 1,
-        // backgroundColor: '#4e73df',
+        backgroundColor: '#fff',
+        opacity: 0.9
+        
         // alignItems: 'center',
         // justifyContent: 'center',
     },

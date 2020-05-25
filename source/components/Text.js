@@ -76,7 +76,7 @@ export default class Typography extends Component {
 
 const styles = StyleSheet.create({
   text: {
-    fontFamily: 'Rubik-Regular',
+    fontFamily: 'Fa-Regular',
     fontSize: theme.sizes.font,
     color: theme.colors.black,
   },

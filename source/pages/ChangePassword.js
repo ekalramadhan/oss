@@ -86,7 +86,7 @@ class ChangePassword extends Component {
 
                 <Text style = {styles.labeluser}>Confirm New Password</Text>
                 <View style = {styles.boxinput}>
-                  <TextInput
+                  <TextInput 
                     name="Confirm New Password"
                     secureTextEntry={true}
                     //placeholder="Password"
@@ -108,24 +108,24 @@ class ChangePassword extends Component {
   const styles = StyleSheet.create({
       container: {
         flexGrow: 1,
-        backgroundColor: '#4e73df',
+        backgroundColor: '#edf2f7',
         
       },
       labeluser: {
         fontSize: 15,
         marginLeft:50,
-        fontWeight:"bold",
-        color:'#87cefa'
+        //fontWeight:"bold",
+        color:'#000000'
       },
       buttonText: {
         fontSize:16,
         fontWeight:"bold",
-        color:'#87cefa'
+        color:'#fff'
       },
       button:{
         width:300,
         alignItems: 'center',
-        backgroundColor: '#002171',
+        backgroundColor: '#4285F4',
         fontSize:16,
         fontWeight:"500",
         borderRadius:10,
@@ -137,6 +137,8 @@ class ChangePassword extends Component {
       boxinput:{
         width:300,
         backgroundColor:'rgba(255,255,255,0.5)',
+        borderColor:'#a0aec0',
+        borderWidth : 1,
         borderRadius:10,
         paddingVertical:10,
         paddingHorizontal:20,

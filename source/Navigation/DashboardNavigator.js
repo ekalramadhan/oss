@@ -3,7 +3,7 @@ import { Platform, Dimensions, Text } from 'react-native';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator, HeaderBackButton } from "react-navigation-stack";
-import { Feather, AntDesign, MaterialIcons } from '@expo/vector-icons';
+import { Feather, AntDesign, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 import Header from '../pages/shared/HeaderDashboard';
 import HeaderPage from '../pages/shared/HeaderPage';
 
@@ -18,15 +18,6 @@ import Logout from '../pages/Logout';
 import AddConfigFormScreen from '../pages/components/configForm/AddConfigForm';
 import EditConfigFormScreen from '../pages/components/configForm/editConfigForm';
 import MapsScreen from '../pages/Maps';
-
-import {
-    Dashboard,
-    MyProfile
-} from "../pages/screens";
-
-
-
-//const WIDTH = Dimensions.get('window').width;
 
 const DashboardNavigator = createStackNavigator({
     Dashboard: { 
@@ -99,7 +90,7 @@ const ConfigurationFormNavigator = createStackNavigator({
         screen: ConfigurationFormScreen,
         navigationOptions: ({ navigation }) => {
             return{
-                headerTitle:() => <HeaderPage navigation = {navigation} title = "Configuration Form"/>,
+                headerTitle:() => <HeaderPage navigation = {navigation} title = "Configuration Form List"/>,
            }
         }
     },
@@ -126,7 +117,7 @@ const MaintenanceFormNavigator = createStackNavigator({
         screen: MaintenanceFormScreen,
         navigationOptions: ({ navigation }) => {
             return{
-                headerTitle:() => <HeaderPage navigation = {navigation} title = "Maintenance Form"/>,
+                headerTitle:() => <HeaderPage navigation = {navigation} title = "Maintenance Request List"/>,
            }
         }
     },
@@ -170,14 +161,14 @@ const DrawerNavigator = createDrawerNavigator(
             screen: DashboardNavigator,
             navigationOptions: {
                 title: "Dashboard",
-                drawerIcon: ({tintColor}) => <Feather name="home" size={16} color={tintColor} />
+                drawerIcon: ({tintColor}) => <FontAwesome5 name="tachometer-alt" size={21} color={tintColor} />
             }
         },
         Maps: {
             screen: MapsNavigator,
             navigationOptions: {
                 title: "Satellite Maps",
-                drawerIcon: ({tintColor}) => <Feather name="map-pin" size={16} color={tintColor} />
+                drawerIcon: ({tintColor}) => <FontAwesome5 name="map-marked-alt" size={21} color={tintColor} />
             }
         },
 
@@ -185,7 +176,7 @@ const DrawerNavigator = createDrawerNavigator(
             screen: MyProfileNavigator,
             navigationOptions: {
                 title: "My Profile",
-                drawerIcon: ({tintColor}) => <Feather name="user" size={16} color={tintColor} />
+                drawerIcon: ({tintColor}) => <FontAwesome5 name="user-alt" size={21} color={tintColor}/>
             }
         },
 
@@ -193,7 +184,7 @@ const DrawerNavigator = createDrawerNavigator(
             screen: ChangePasswordNavigator,
             navigationOptions: {
                 title: "Change Password",
-                drawerIcon: ({tintColor}) => <Feather name="lock" size={16} color={tintColor} />
+                drawerIcon: ({tintColor}) => <FontAwesome5 name="key" size={21} color={tintColor} />
             }
         },
 
@@ -201,27 +192,31 @@ const DrawerNavigator = createDrawerNavigator(
             screen: ConfigurationFormNavigator,
             navigationOptions: {
                 title: "Configuration Form",
-                drawerIcon: ({tintColor}) => <Feather name="edit" size={16} color={tintColor} />
+                drawerIcon: ({tintColor}) => <FontAwesome5 name="plus-square" size={21} color={tintColor}/>
             }
         },
 
         MaintenanceForm: {
             screen: MaintenanceFormNavigator,
             navigationOptions: {
-                title: "Maintenance Form",
-                drawerIcon: ({tintColor}) => <MaterialIcons name="report-problem" size={16} color={tintColor} />
+                title: "Maintenance Request List",
+                drawerIcon: ({tintColor}) => <FontAwesome5 name="list-alt" size={21} color={tintColor}/>
             }
         },
         Logout: {
             screen: LogoutNavigator,
             navigationOptions: {
                 title: "Logout",
-                drawerIcon: ({tintColor}) => <AntDesign name="logout" size={16} color={tintColor} />
+                drawerIcon: ({tintColor}) => <FontAwesome5 name="sign-out-alt" size={21} color={tintColor} />
             }
         }
     },
     {
-        contentComponent: props => <SideBar {...props}/>
+        contentComponent: props => <SideBar {...props}/>,
+        contentOptions: {
+            activeTintColor: "#fff",
+            activeBackgroundColor : 'blue',
+        }
     }
 );
 

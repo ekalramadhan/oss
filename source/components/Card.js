@@ -48,8 +48,9 @@ export default class Card extends Component {
 const styles = StyleSheet.create({
   card: {
     flex: 1,
-    padding: 25,
+    padding: 0,
     backgroundColor: theme.colors.white,
+    borderRadius : 10
   },
   header: {
     paddingBottom: 24,

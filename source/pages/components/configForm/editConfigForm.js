@@ -66,7 +66,7 @@ class EditConfigurationForm extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         return{
-            headerTitle: "Edit Configuration",
+            headerTitle: "Edit Configuration Form",
        }
     }
     
@@ -94,7 +94,7 @@ class EditConfigurationForm extends React.Component {
         const data = {
             id: this.state.id,
             lokasi: this.state.lokasi,
-            tanggalpemasangan: this.state.tanggalpemasangan.includes('-') ? new Date(this.state.tanggalpemasangan).getTime() / 1000 : this.state.tanggalpemasangan,
+            tanggalpemasangan: this.state.tanggalpemasangan ? new Date(this.state.tanggalpemasangan).getTime(): this.state.tanggalpemasangan,
             namapelanggan: this.state.namapelanggan,
             modemid: this.state.modem,
             beam: this.state.beam,
@@ -142,12 +142,12 @@ class EditConfigurationForm extends React.Component {
                             <View>
                                 <DatePicker
                                     style={{width: 295}}
-                                    date={moment(this.state.tanggalpemasangan, 'x').format("DD-MM-YYYY")}
+                                    date={moment(this.state.tanggalpemasangan*1000).format("DD MMMM YYYY")}
                                     mode="date"
                                     placeholder="select date"
-                                    format="YYYY-MM-DD"
-                                    minDate="2010-05-01"
-                                    maxDate="2030-06-01"
+                                    format="DD MMMM YYYY"
+                                    minDate="01 January 2010"
+                                    maxDate="01 December 2030"
                                     confirmBtnText="Confirm"
                                     cancelBtnText="Cancel"
                                     customStyles={{
@@ -162,7 +162,7 @@ class EditConfigurationForm extends React.Component {
                                         marginLeft: 36
                                     }
                                     }}
-                                    onDateChange={(tanggalpemasangan) => {this.setState({tanggalpemasangan: new Date(tanggalpemasangan).getTime()})}}
+                                    onDateChange={(tanggalpemasangan) => {this.setState({tanggalpemasangan: new Date(tanggalpemasangan).getTime()/1000})}}
                                 />
                             </View>
                             
@@ -216,7 +216,7 @@ class EditConfigurationForm extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flexGrow: 1,
-        backgroundColor: '#4e73df',
+        backgroundColor: '#edf2f7',
         alignItems: 'center',
         justifyContent: 'center',
         minHeight: Dimensions.get("window").height,
@@ -244,6 +244,8 @@ const styles = StyleSheet.create({
     },
     inputBox: {
         backgroundColor: 'rgba(255,255,255,0.5)',
+        borderColor:'#a0aec0',
+        borderWidth : 1,
         opacity: 0.8,
         borderRadius: 5,
         flexDirection: 'row',
@@ -262,7 +264,7 @@ const styles = StyleSheet.create({
         paddingRight: 40,
         paddingTop: 9,
         paddingBottom: 9,
-        backgroundColor: '#002171',
+        backgroundColor: '#4285F4',
     },
     buttonPicker: {
         borderRadius: 5,
@@ -299,7 +301,7 @@ const styles = StyleSheet.create({
         flex: 3,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#002171',
+        backgroundColor: '#4285F4',
         fontSize:16,
         fontWeight:"500",
         borderRadius:10,
@@ -310,7 +312,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#c81912',
+        backgroundColor: '#4a5568',
         fontSize:16,
         fontWeight:"500",
         borderRadius:10,
@@ -320,7 +322,7 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize:16,
         fontWeight:"bold",
-        color:'#87cefa'
+        color:'#fff'
     }
 });
 

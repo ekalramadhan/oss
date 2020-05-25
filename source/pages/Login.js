@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView, AsyncStorage, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, TextInput, TouchableOpacity, KeyboardAvoidingView, AsyncStorage, ActivityIndicator } from 'react-native';
 import {Actions} from 'react-native-router-flux';
-
+import { Block, Card, Text, Icon, Label } from '../components';
 import Logo from '../components/Logo';
 import { ScrollView } from 'react-native-gesture-handler';
 import API_config from '../config/API_config';
@@ -149,7 +149,7 @@ class Login extends Component {
 const styles = StyleSheet.create({
     container: {
       flexGrow: 1,
-      backgroundColor: '#4e73df',
+      backgroundColor: '#4285F4',
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -166,6 +166,7 @@ const styles = StyleSheet.create({
       fontSize:14
     },
     buttonText: {
+      fontFamily:'Rubik-Regular',
       fontSize:16,
       fontWeight:"bold",
       color:'#87cefa'

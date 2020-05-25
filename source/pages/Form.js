@@ -7,7 +7,7 @@ import { getAsyncStorage } from '../action/asyncStorage';
 import { connect } from 'react-redux';
 import { Feather, AntDesign } from '@expo/vector-icons';
 import { getProfile } from '../action/profile';
-import Card from './components/configForm/elements/Card';
+import Cardform from './components/configForm/elements/CardForm';
 
 class ConfigurationForm extends React.Component {
     constructor(props){
@@ -126,22 +126,22 @@ class ConfigurationForm extends React.Component {
                     >
                         <View style={styles.centeredView}>
                         <View style={styles.modalView}>
-                            <Text style={styles.modalText}>Anda yakin ingin menghapus?</Text>
+                            <Text style={styles.modalText}>Are you sure want to delete?</Text>
 
                             <View style={styles.modalButtons}>
                                 <TouchableHighlight
-                                style={{ ...styles.openButton, backgroundColor: "#2196F3", marginHorizontal: 6 }}
+                                style={{ ...styles.openButton, backgroundColor: '#4a5568', marginHorizontal: 6 }}
                                 onPress={() => {
                                     this.setState({modalVisible: false})
                                 }}
                                 >
-                                <Text style={styles.textStyle}>Batal</Text>
+                                <Text style={styles.textStyle}> Cancel </Text>
                                 </TouchableHighlight>
                                 <TouchableHighlight
-                                style={{ ...styles.openButton, backgroundColor: "#c81912", marginHorizontal: 6 }}
+                                style={{ ...styles.openButton, backgroundColor: "#ff4444", marginHorizontal: 6 }}
                                 onPress={this.handleDelete}
                                 >
-                                <Text style={styles.textStyle}>Hapus</Text>
+                                <Text style={styles.textStyle}> Delete </Text>
                                 </TouchableHighlight>
                             </View>
                         </View>
@@ -156,7 +156,7 @@ class ConfigurationForm extends React.Component {
                                 this.state.configForm.length
                                 ?
                                 this.state.configForm.map(data => {
-                                    return <Card key={data.id} modal={this.handleModal} data={data} {...this.props}/>
+                                    return <Cardform key={data.id} modal={this.handleModal} data={data} {...this.props}/>
                                 })
                                 :
                                 <ActivityIndicator style={styles.centeredView} size="large" color="#ffff" />
@@ -166,7 +166,7 @@ class ConfigurationForm extends React.Component {
                     </View>
                 </ScrollView>
                 <TouchableOpacity style={styles.fab} onPress={()=>this.props.navigation.navigate('AddConfigForm', { go_back_key: this.props.navigation.state.key })}>
-                    <AntDesign name="pluscircle" color="white" size={50} />
+                    <AntDesign name="pluscircle" color="#4285F4" size={50} />
                 </TouchableOpacity>
             </View>
         );
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
         padding: 16, 
         paddingTop: 30,
         // flexGrow: 1,
-        backgroundColor: '#4e73df',
+        backgroundColor: '#edf2f7',
         minHeight: Dimensions.get("window").height
         // alignItems: 'center',
         // justifyContent: 'center',

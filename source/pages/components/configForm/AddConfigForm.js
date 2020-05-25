@@ -46,7 +46,7 @@ class ConfigurationForm extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         return{
-            headerTitle: "Add Configuration",
+            headerTitle: "Configuration Form",
        }
     }
     
@@ -128,9 +128,9 @@ class ConfigurationForm extends React.Component {
                                     date={this.state.tanggalpemasangan}
                                     mode="date"
                                     placeholder="select date"
-                                    format="YYYY-MM-DD"
-                                    minDate="2010-05-01"
-                                    maxDate="2030-06-01"
+                                    format="DD MMMM YYYY"
+                                    minDate="01 January 2010"
+                                    maxDate="01 December 2030"
                                     confirmBtnText="Confirm"
                                     cancelBtnText="Cancel"
                                     customStyles={{
@@ -181,9 +181,6 @@ class ConfigurationForm extends React.Component {
                                 />
                             </View>
                             <View style={styles.saveCancel}>
-                                    <TouchableOpacity style = {styles.buttonCancel} onPress={this.handleCancel}>
-                                        <Text style = {styles.buttonText}><MaterialIcons name="settings-backup-restore" size={32} /></Text>
-                                    </TouchableOpacity>
                                     <TouchableOpacity style = {styles.buttonSave} onPress={this.handleSave}>
                                         <Text style = {styles.buttonText}>Save</Text>
                                     </TouchableOpacity>
@@ -200,7 +197,7 @@ const styles = StyleSheet.create({
     container: {
         minHeight: Dimensions.get("window").height,
         flexGrow: 1,
-        backgroundColor: '#4e73df',
+        backgroundColor: '#edf2f7',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -227,8 +224,10 @@ const styles = StyleSheet.create({
     },
     inputBox: {
         backgroundColor: 'rgba(255,255,255,0.5)',
+        borderColor :'#a0aec0',
+        borderWidth : 1,
         opacity: 0.8,
-        borderRadius: 5,
+        borderRadius: 10,
         flexDirection: 'row',
         alignItems: 'center',
         padding: 5,
@@ -245,7 +244,7 @@ const styles = StyleSheet.create({
         paddingRight: 40,
         paddingTop: 9,
         paddingBottom: 9,
-        backgroundColor: '#002171',
+        backgroundColor: '#4285F4',
     },
     buttonPicker: {
         borderRadius: 5,
@@ -282,18 +281,17 @@ const styles = StyleSheet.create({
         flex: 3,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#002171',
+        backgroundColor: '#4285F4',
         fontSize:16,
         fontWeight:"500",
         borderRadius:10,
-        padding: 10,
-        marginLeft: 5,
+        padding: 10
     },
     buttonCancel:{
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#c81912',
+        backgroundColor: '#4a5568',
         fontSize:16,
         fontWeight:"500",
         borderRadius:10,
@@ -303,7 +301,7 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize:16,
         fontWeight:"bold",
-        color:'#87cefa'
+        color:'#fff'
     }
 });
 

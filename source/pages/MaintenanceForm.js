@@ -7,7 +7,7 @@ import { getAsyncStorage } from '../action/asyncStorage';
 import { connect } from 'react-redux';
 import { Feather, AntDesign } from '@expo/vector-icons';
 import { getProfile } from '../action/profile';
-import Card from './components/maintenanceForm/elements/Card';
+import Cardmaintenance from './components/maintenanceForm/elements/CardMaintenance';
 
 class MaintenanceForm extends React.Component {
     constructor(props){
@@ -132,7 +132,7 @@ class MaintenanceForm extends React.Component {
                                 this.state.maintenanceForm.length
                                 ?
                                 this.state.maintenanceForm.map(data => {
-                                    return <Card modal={this.handleModal} data={data} {...this.props}/>
+                                    return <Cardmaintenance modal={this.handleModal} data={data} {...this.props}/>
                                 })
                                 :
                                 <ActivityIndicator style={styles.centeredView} size="large" color="#ffff" />
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
         padding: 16, 
         paddingTop: 30,
         // flexGrow: 1,
-        backgroundColor: '#4e73df',
+        backgroundColor: '#edf2f7',
         minHeight: Dimensions.get("window").height
         // alignItems: 'center',
         // justifyContent: 'center',
@@ -186,14 +186,6 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         padding: 35,
         alignItems: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5
       },
       openButton: {
         backgroundColor: "#F194FF",

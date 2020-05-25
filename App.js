@@ -69,7 +69,10 @@ export default class App extends Component {
         "Rubik-LightItalic": require("./assets/fonts/Rubik-LightItalic.ttf"),
         "Rubik-Medium": require("./assets/fonts/Rubik-Medium.ttf"),
         "Rubik-MediumItalic": require("./assets/fonts/Rubik-MediumItalic.ttf"),
-        "Rubik-Regular": require("./assets/fonts/Rubik-Regular.ttf")
+        "Rubik-Regular": require("./assets/fonts/Rubik-Regular.ttf"),
+        "Fa-Brands": require("./assets/fonts/fa-brands-400.ttf"),
+        "Fa-Regular": require("./assets/fonts/fa-regular-400.ttf"),
+        "Fa-Solid": require("./assets/fonts/fa-solid-900.ttf")
       })
     ]);
   };

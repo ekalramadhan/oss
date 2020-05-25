@@ -190,7 +190,7 @@ const validate = (values) => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: '#4e73df',
+    backgroundColor: '#4285F4',
     alignItems: 'center',
     justifyContent: 'center',
   },

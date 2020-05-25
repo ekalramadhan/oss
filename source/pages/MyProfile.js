@@ -10,6 +10,7 @@ import { bindActionCreators } from 'redux';
 import { getProfile, editProfile } from '../action/profile';
 import { getAsyncStorage } from '../action/asyncStorage';
 import { connect } from 'react-redux';
+import { Card } from '../components';
 
 class MyProfile extends Component {
   constructor(props) {
@@ -114,11 +115,17 @@ class MyProfile extends Component {
                       {
                         this.state.edit
                         ?
+                       <View style={styles.boxinput}> 
                         <TextInput style={styles.textimg} autoFocus={true} value={this.state.newName} onChangeText={(text) => this.setState({newName: text})}></TextInput>
+                        </View>
                         :
+                        <View style={styles.boxinput}> 
                         <Text style={styles.textimg}> {this.state.name} </Text>
+                        </View>
                       }
+                       <View style={[styles.boxinput, {backgroundColor:'#cbd5e0'}]}> 
                       <Text style={styles.textimg}> {this.state.email} </Text>
+                      </View>
                       <Text style={styles.textemail}> Member since {moment(this.state.date_created*1000).format("DD MMMM YYYY")}  </Text>
                       {
                         this.state.edit
@@ -133,7 +140,7 @@ class MyProfile extends Component {
                         </View>
                         :
                         <TouchableOpacity style = {styles.button} onPress={()=>{this.setState({edit: true})}}>
-                          <Text style = {styles.buttonText}>Edit</Text>
+                          <Text style = {styles.buttonText}>Edit Profile</Text>
                         </TouchableOpacity>
                       }
 
@@ -149,7 +156,7 @@ class MyProfile extends Component {
   const styles = StyleSheet.create({
       container: {
         flexGrow: 1,
-        backgroundColor: '#4e73df',
+        backgroundColor: '#edf2f7',
         alignItems: 'center',
         justifyContent: 'center',
       },
@@ -165,26 +172,26 @@ class MyProfile extends Component {
         fontWeight: 'bold',
         alignItems: 'center',
         justifyContent: 'center',
-        color :'#87cefa',
+        color :'#000000',
       },
       textemail: {
         fontSize : 18,
         fontStyle: 'normal',
         alignItems: 'center',
         justifyContent: 'center',
-        color :'#87cefa',
-        marginBottom:50
+        color :'#000000',
+        marginBottom:10
       },
       buttonText: {
         fontSize:16,
         fontWeight:"bold",
-        color:'#87cefa'
+        color:'#fff'
       },
       button:{
         width:300,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#002171',
+        backgroundColor: '#4285F4',
         fontSize:16,
         fontWeight:"500",
         borderRadius:10,
@@ -195,7 +202,7 @@ class MyProfile extends Component {
         width:150,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#002171',
+        backgroundColor: '#4285F4',
         fontSize:16,
         fontWeight:"500",
         borderRadius:10,
@@ -205,7 +212,7 @@ class MyProfile extends Component {
         width:150,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'red',
+        backgroundColor: '#4a5568',
         fontSize:16,
         fontWeight:"500",
         borderRadius:10,
@@ -213,7 +220,8 @@ class MyProfile extends Component {
       },
       boxinput:{
         width:300,
-        backgroundColor:'rgba(255,255,255,0.5)',
+        borderColor:'#a0aec0',
+        borderWidth:1,
         borderRadius:10,
         paddingVertical:10,
         paddingHorizontal:20,

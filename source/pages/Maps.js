@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Image, SafeAreaView, ScrollView, StyleSheet, Dimensions, View, Button, TextInput, ActivityIndicator, Picker, Alert} from 'react-native';
+import { TouchableOpacity,Text, SafeAreaView, ScrollView, StyleSheet, Dimensions, View, Button, TextInput, ActivityIndicator, Picker, Alert} from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
-import { Block, Card, Text, Icon, Label } from '../components';
+import { MaterialIcons } from '@expo/vector-icons';
 import * as theme from '../constants/theme';
 import { getLatLngObj } from "tle.js";
 
@@ -10,21 +10,35 @@ const { width, height } = Dimensions.get("window");
 const styles = StyleSheet.create({
    map: {
     height: 800,
-    width: 400
+    width: 450
   },
   saveButton: {
-  borderWidth: 1,
-  borderColor: '#007BFF',
-  backgroundColor: '#007BFF',
-  padding: 15,
-  margin: 5
-},
+    borderRadius:10,
+    backgroundColor: '#4285F4',
+    padding: 15,
+    margin: 5,
+  },
+  setLocation: {
+    borderRadius:100,
+    backgroundColor: '#fff',
+    padding: 15,
+    margin: 5,
+  },
   container: {
     flexGrow: 1,
-    backgroundColor: '#4e73df',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#edf2f7',
   },
+  buttonMarker: {
+    flexDirection: 'row',
+    marginTop: 5,
+    padding : 5
+  },
+  inputBox :{
+    height: 40, 
+    borderColor: '#a0aec0', 
+    borderWidth: 1,
+    borderRadius : 10,
+  }
 });
 
 function MakeTLE(a)
@@ -87,7 +101,7 @@ componentWillMount() {
         this.setState ({
           latitude,
           longitude,
-          isLoading: false
+          isLoading: false,
         });
         },
         {enableHighAccuracy: true, Timeout: 20000}
@@ -187,24 +201,27 @@ handleSubmit() {
      else {
     return (
       latLonObj = getLatLngObj(MakeTLE(this.state.Satellite.member[0])),
-      <SafeAreaView style={styles.overview}>
+      <SafeAreaView style={styles.container}>
         <ScrollView contentContainerStyle={{ paddingVertical: 25 }}>
+        <View style= {{paddingLeft:10, paddingRight:10}}>
           <TextInput
-      style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+      style={styles.inputBox}
       onChangeText={this.handleNameChange}
-      placeholder="Input Satellite Name Here"
+      placeholder=" Input Satellite Name Here "
     />
-    <TouchableOpacity
-      style={styles.saveButton}
-      onPress={this.handleSubmit}>
-        <Text style={styles.saveButtonText}>Save</Text>
-    </TouchableOpacity>
-
-      <TouchableOpacity
-      style={styles.saveButton}
-      onPress={this.updateLocation}> 
-        <Text style={styles.saveButtonText}> Display Route </Text>
-      </TouchableOpacity>
+    </View>
+    <View style={styles.buttonMarker}>
+        <TouchableOpacity style = {styles.setLocation} onPress={this.getLocation}>
+            <MaterialIcons name="my-location" size={22} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity style = {styles.saveButton} onPress={this.handleSubmit}>
+            <Text style = {{color : '#fff', fontWeight:'bold'}}>Mark Satellite</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style = {styles.saveButton} onPress={this.updateLocation}>
+            <Text style = {{color : '#fff', fontWeight:'bold'}}>Display Route</Text>
+        </TouchableOpacity>
+    </View>
+     
       <MapView 
       region={this.state.region}
       onRegionChange={this.onRegionChange}
@@ -214,6 +231,7 @@ handleSubmit() {
       zoomEnabled
       zoomControlEnabled
       showsUserLocation={true}
+      followsUserLocation={true}
     >
     <Marker
       coordinate={{

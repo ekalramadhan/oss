@@ -68,14 +68,14 @@ const timeIcon =(
 
 export default class Icon extends PureComponent {
   render() {
-    const { menu, notification, vehicle, distance, options, children, sql, memory, attenuation, time } = this.props;
+    const { menu, notification, vehicle, distance, options, children, sqf, memory, attenuation, time } = this.props;
 
     if (menu) return menuIcon;
     if (notification) return notificationIcon;
     if (vehicle) return vehicleIcon;
     if (distance) return distanceIcon;
     if (options) return optionsIcon;
-    if (sql) return sqfIcon;
+    if (sqf) return sqfIcon;
     if (memory) return memoryIcon;
     if (attenuation) return attenuationIcon;
     if (time) return timeIcon;

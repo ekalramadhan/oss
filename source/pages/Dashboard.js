@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Image, SafeAreaView, ScrollView, StyleSheet, Dimensions, View, Button, Picker} from 'react-native';
+import { TouchableOpacity, SafeAreaView, ScrollView, StyleSheet, Dimensions, View, Button, Picker} from 'react-native';
 import { LineChart } from "react-native-chart-kit";
 import { VictoryArea, VictoryBar, VictoryChart, VictoryTheme,VictoryLine } from "victory-native";
 
@@ -48,6 +48,8 @@ const styles = StyleSheet.create({
       marginHorizontal: 20,
       marginBottom: 10,
       backgroundColor: 'rgba(255,255,255,0.5)',
+      borderColor:'#cbd5e0',
+      borderWidth:2,
   },
   picker: {
     flex: 1
@@ -55,18 +57,16 @@ const styles = StyleSheet.create({
   overview: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: theme.colors.blue,
+    backgroundColor: '#edf2f7'
   },
   margin: {
-    marginHorizontal: 25,
+    marginHorizontal: 15,
   },
   driver: {
     marginBottom: 11,
   },
   avatar: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+    padding:10
   },
   container: {
     flexGrow: 1,
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     padding: 18
   },
   filterTimeText: {
-    color: '#ffff'
+    color: '#fff'
   }
 });
 
@@ -161,15 +161,27 @@ class Dashboard extends Component {
       data: [],
       isLoading1: true,
       isLoading2: true,
-      isLoading3: true,
-      
+      isLoading3: true,     
       downlink: [],
       uplink: [],
       modem: [],
       headline: [],
       router: '',
       downlinkChart: 'today',
-      uplinkChart: 'today'
+      uplinkChart: 'today',
+      yma: 18,
+      ymb: 36,
+      ymc: 54,
+      ymd: 72,
+      yme: 90,
+      ymf: 108,
+      ymg: 126,
+      id: 1,
+      SampleArray: [],
+      lastvar: 0,
+      lastvar2: 0,
+      lastvar3: 0,
+      lastvar4: 0,
     }
   } 
 
@@ -180,7 +192,18 @@ class Dashboard extends Component {
       c : 12,
       d : 11,
       e : 10,
-      modemnow : "Modem 1"
+      yma: 18,
+      ymb: 36,
+      ymc: 54,
+      ymd: 72,
+      yme: 90,
+      ymf: 108,
+      ymg: 126,
+      id: 1,
+      modemnow : "Modem 1",
+      lastvar: this.state.downlink.length - 3,
+      lastvar2: this.state.uplink.length - 3,
+      lastvar3: this.state.modem.length - 3,
     })
   }
 
@@ -191,7 +214,18 @@ class Dashboard extends Component {
       c : 7,
       d : 6,
       e : 5,
-      modemnow : "Modem 2"
+      yma: 19,
+      ymb: 37,
+      ymc: 55,
+      ymd: 73,
+      yme: 91,
+      ymf: 109,
+      ymg: 127,
+      id: 2,
+      modemnow : "Modem 2",
+      lastvar: this.state.downlink.length - 2,
+      lastvar2: this.state.uplink.length - 2,
+      lastvar3: this.state.modem.length - 2,
     })
   }
 
@@ -202,7 +236,18 @@ class Dashboard extends Component {
         c : 2,
         d : 1,
         e : 0,
-        modemnow : "Modem 3"
+      yma: 20,
+      ymb: 38,
+      ymc: 56,
+      ymd: 74,
+      yme: 92,
+      ymf: 110,
+      ymg: 128,
+      id: 3,
+        modemnow : "Modem 3",
+        lastvar: this.state.downlink.length - 1,
+        lastvar2: this.state.uplink.length - 1,
+        lastvar3: this.state.modem.length - 1,
       })
   }
 
@@ -211,6 +256,9 @@ class Dashboard extends Component {
     this.getUplink();
     this.getModem();
     this.getHeadline();
+    if (this.state.downlink.length > 0 && this.state.uplink.length > 0 && this.state.modem.length > 0){
+   this.setState({lastvar: this.state.downlink.length - 3, lastvar2: this.state.uplink.length - 3, lastvar3: this.state.modem.length - 3})
+ }
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -330,7 +378,7 @@ class Dashboard extends Component {
   handleUplinkChart = {
     today: () => {
       this.setState({uplinkChart: 'today'});
-      this.getUplink('today')
+      this.getUplink('today');
     },
     yesterday: () => {
       this.setState({uplinkChart: 'yesterday'});
@@ -345,20 +393,45 @@ class Dashboard extends Component {
   dataDownlink = () => {
     if (this.state.downlinkChart === 'week') {
       return [
-        {  x: this.state.downlink.length ? this.state.downlink[2].timestamp : 0, y: parseInt(this.state.downlink.length ? this.state.downlink[2].sqf ? this.state.downlink[2].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[2].sqf ? this.state.downlink[2].sqf : 0 : 0},
-        {  x: this.state.downlink.length ? this.state.downlink[3].timestamp : 0, y: parseInt(this.state.downlink.length ? this.state.downlink[3].sqf ? this.state.downlink[3].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[3].sqf ? this.state.downlink[3].sqf : 0 : 0},
-        {  x: this.state.downlink.length ? this.state.downlink[4].timestamp : 0, y: parseInt(this.state.downlink.length ? this.state.downlink[4].sqf ? this.state.downlink[4].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[4].sqf ? this.state.downlink[4].sqf : 0 : 0},
-        {  x: this.state.downlink.length ? this.state.downlink[5].timestamp : 0, y: parseInt(this.state.downlink.length ? this.state.downlink[5].sqf ? this.state.downlink[5].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[5].sqf ? this.state.downlink[5].sqf : 0 : 0},
-        {  x: this.state.downlink.length ? this.state.downlink[6].timestamp : 0, y: parseInt(this.state.downlink.length ? this.state.downlink[6].sqf ? this.state.downlink[6].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[6].sqf ? this.state.downlink[6].sqf : 0 : 0},
+          {  x: this.state.downlink.length ? this.state.downlink[2].timestamp : 0, y: parseInt(this.state.downlink.length ? this.state.downlink[2].sqf ? this.state.downlink[2].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[2].sqf ? this.state.downlink[2].sqf : 0 : 0},
+          {  x: this.state.downlink.length ? this.state.downlink[3].timestamp : 0, y: parseInt(this.state.downlink.length ? this.state.downlink[3].sqf ? this.state.downlink[3].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[3].sqf ? this.state.downlink[3].sqf : 0 : 0},
+          {  x: this.state.downlink.length ? this.state.downlink[4].timestamp : 0, y: parseInt(this.state.downlink.length ? this.state.downlink[4].sqf ? this.state.downlink[4].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[4].sqf ? this.state.downlink[4].sqf : 0 : 0},
+          {  x: this.state.downlink.length ? this.state.downlink[5].timestamp : 0, y: parseInt(this.state.downlink.length ? this.state.downlink[5].sqf ? this.state.downlink[5].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[5].sqf ? this.state.downlink[5].sqf : 0 : 0},
+          {  x: this.state.downlink.length ? this.state.downlink[6].timestamp : 0, y: parseInt(this.state.downlink.length ? this.state.downlink[6].sqf ? this.state.downlink[6].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[6].sqf ? this.state.downlink[6].sqf : 0 : 0},
+          //{  x: this.state.downlink.length ? this.state.downlink[7].timestamp : 0, y: parseInt(this.state.downlink.length ? this.state.downlink[7].sqf ? this.state.downlink[7].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[7].sqf ? this.state.downlink[7].sqf : 0 : 0},
+          //{  x: this.state.downlink.length ? this.state.downlink[8].timestamp : 0, y: parseInt(this.state.downlink.length ? this.state.downlink[8].sqf ? this.state.downlink[8].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[8].sqf ? this.state.downlink[8].sqf : 0 : 0}
           ]
-    } else {
+    }  if (this.state.downlinkChart === 'yesterday') {
       return [
-        {  x: Unix_timestamp(this.state.downlink.length ? this.state.downlink[this.state.e].timestamp ? this.state.downlink[this.state.e].timestamp : 0 : 0), y: parseInt(this.state.downlink.length ? this.state.downlink[this.state.e].sqf ? this.state.downlink[this.state.e].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[this.state.e].sqf ? this.state.downlink[this.state.e].sqf : 0 : 0},
-        {  x: Unix_timestamp(this.state.downlink.length ? this.state.downlink[this.state.d].timestamp ? this.state.downlink[this.state.d].timestamp : 0 : 0), y: parseInt(this.state.downlink.length ? this.state.downlink[this.state.d].sqf ? this.state.downlink[this.state.d].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[this.state.d].sqf ? this.state.downlink[this.state.d].sqf : 0 : 0},
-        {  x: Unix_timestamp(this.state.downlink.length ? this.state.downlink[this.state.c].timestamp ? this.state.downlink[this.state.c].timestamp : 0 : 0), y: parseInt(this.state.downlink.length ? this.state.downlink[this.state.c].sqf ? this.state.downlink[this.state.c].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[this.state.c].sqf ? this.state.downlink[this.state.c].sqf : 0 : 0},
-        {  x: Unix_timestamp(this.state.downlink.length ? this.state.downlink[this.state.b].timestamp ? this.state.downlink[this.state.b].timestamp : 0 : 0), y: parseInt(this.state.downlink.length ? this.state.downlink[this.state.b].sqf ? this.state.downlink[this.state.b].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[this.state.b].sqf ? this.state.downlink[this.state.b].sqf : 0 : 0},
-        {  x: Unix_timestamp(this.state.downlink.length ? this.state.downlink[this.state.a].timestamp ? this.state.downlink[this.state.a].timestamp : 0 : 0), y: parseInt(this.state.downlink.length ? this.state.downlink[this.state.a].sqf ? this.state.downlink[this.state.a].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[this.state.a].sqf ? this.state.downlink[this.state.a].sqf : 0 : 0},
+        {  x: Unix_timestamp(this.state.downlink.length ? this.state.downlink[this.state.yma].timestamp ? this.state.downlink[this.state.yma].timestamp : 0 : 0), y: parseInt(this.state.downlink.length ? this.state.downlink[this.state.yma].sqf ? this.state.downlink[this.state.yma].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[this.state.yma].sqf ? this.state.downlink[this.state.yma].sqf : 0 : 0},
+        {  x: Unix_timestamp(this.state.downlink.length ? this.state.downlink[this.state.ymb].timestamp ? this.state.downlink[this.state.ymb].timestamp : 0 : 0), y: parseInt(this.state.downlink.length ? this.state.downlink[this.state.ymb].sqf ? this.state.downlink[this.state.ymb].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[this.state.ymb].sqf ? this.state.downlink[this.state.ymb].sqf : 0 : 0},
+        {  x: Unix_timestamp(this.state.downlink.length ? this.state.downlink[this.state.ymc].timestamp ? this.state.downlink[this.state.ymc].timestamp : 0 : 0), y: parseInt(this.state.downlink.length ? this.state.downlink[this.state.ymc].sqf ? this.state.downlink[this.state.ymc].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[this.state.ymc].sqf ? this.state.downlink[this.state.ymc].sqf : 0 : 0},
+        {  x: Unix_timestamp(this.state.downlink.length ? this.state.downlink[this.state.ymd].timestamp ? this.state.downlink[this.state.ymd].timestamp : 0 : 0), y: parseInt(this.state.downlink.length ? this.state.downlink[this.state.ymd].sqf ? this.state.downlink[this.state.ymd].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[this.state.ymd].sqf ? this.state.downlink[this.state.ymd].sqf : 0 : 0},
+        {  x: Unix_timestamp(this.state.downlink.length ? this.state.downlink[this.state.yme].timestamp ? this.state.downlink[this.state.yme].timestamp : 0 : 0), y: parseInt(this.state.downlink.length ? this.state.downlink[this.state.yme].sqf ? this.state.downlink[this.state.yme].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[this.state.yme].sqf ? this.state.downlink[this.state.yme].sqf : 0 : 0},
+        {  x: Unix_timestamp(this.state.downlink.length ? this.state.downlink[this.state.ymf].timestamp ? this.state.downlink[this.state.ymf].timestamp : 0 : 0), y: parseInt(this.state.downlink.length ? this.state.downlink[this.state.ymf].sqf ? this.state.downlink[this.state.ymf].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[this.state.ymf].sqf ? this.state.downlink[this.state.ymf].sqf : 0 : 0},
+        {  x: Unix_timestamp(this.state.downlink.length ? this.state.downlink[this.state.ymg].timestamp ? this.state.downlink[this.state.ymg].timestamp : 0 : 0), y: parseInt(this.state.downlink.length ? this.state.downlink[this.state.ymg].sqf ? this.state.downlink[this.state.ymg].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[this.state.ymg].sqf ? this.state.downlink[this.state.ymg].sqf : 0 : 0}
         ]
+    }
+    else{  const arraytod = [];
+          if (this.state.downlink.length > 20) {
+            for(let i = this.state.downlink.length - 21;i<this.state.downlink.length;i++) {
+             
+              if (this.state.downlink[i].scrap_id == this.state.id) {
+                arraytod.push({x: Unix_timestamp(this.state.downlink.length ? this.state.downlink[i].timestamp ? this.state.downlink[i].timestamp : 0 : 0), y: parseInt(this.state.downlink.length ? this.state.downlink[i].sqf ? this.state.downlink[i].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[i].sqf ? this.state.downlink[i].sqf : 0 : 0});              
+              }    
+        } 
+      }
+            if (this.state.downlink.length < 21 && this.state.downlink.length > 0) {
+            for(let i = 0;i<this.state.downlink.length;i++) {
+             
+              if (this.state.downlink[i].scrap_id == this.state.id) {
+                arraytod.push({x: Unix_timestamp(this.state.downlink.length ? this.state.downlink[i].timestamp ? this.state.downlink[i].timestamp : 0 : 0), y: parseInt(this.state.downlink.length ? this.state.downlink[i].sqf ? this.state.downlink[i].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[i].sqf ? this.state.downlink[i].sqf : 0 : 0});              
+              }    
+        } 
+      }
+        if (arraytod.length > 0) {
+          return arraytod
+        }
     }
   }
   dataUplink = () => {
@@ -369,16 +442,41 @@ class Dashboard extends Component {
         {  x: this.state.uplink.length ? this.state.uplink[4].timestamp  : 0, y: this.state.uplink.length ? this.state.uplink[4].power_atten : 0, label: this.state.uplink.length ? this.state.uplink[4].power_atten : 0},
         {  x: this.state.uplink.length ? this.state.uplink[5].timestamp  : 0, y: this.state.uplink.length ? this.state.uplink[5].power_atten : 0, label: this.state.uplink.length ? this.state.uplink[5].power_atten : 0},
         {  x: this.state.uplink.length ? this.state.uplink[6].timestamp  : 0, y: this.state.uplink.length ? this.state.uplink[6].power_atten : 0, label: this.state.uplink.length ? this.state.uplink[6].power_atten : 0},
+        //{  x: this.state.uplink.length ? this.state.uplink[7].timestamp  : 0, y: this.state.uplink.length ? this.state.uplink[7].power_atten : 0, label: this.state.uplink.length ? this.state.uplink[7].power_atten : 0},
+        //{  x: this.state.uplink.length ? this.state.uplink[8].timestamp  : 0, y: this.state.uplink.length ? this.state.uplink[8].power_atten : 0, label: this.state.uplink.length ? this.state.uplink[8].power_atten : 0}
         ]
     }
-    return [
-      {  x: Unix_timestamp(this.state.uplink.length ? this.state.uplink[this.state.e].timestamp ? this.state.uplink[this.state.e].timestamp : 0 : 0), y: this.state.uplink.length ? this.state.uplink[this.state.e].power_atten ? this.state.uplink[this.state.e].power_atten : 0 : 0, label: this.state.uplink.length ? this.state.uplink[this.state.e].power_atten ? this.state.uplink[this.state.e].power_atten : 0 : 0},
-      {  x: Unix_timestamp(this.state.uplink.length ? this.state.uplink[this.state.d].timestamp ? this.state.uplink[this.state.d].timestamp : 0 : 0), y: this.state.uplink.length ? this.state.uplink[this.state.d].power_atten ? this.state.uplink[this.state.d].power_atten : 0 : 0, label: this.state.uplink.length ? this.state.uplink[this.state.d].power_atten ? this.state.uplink[this.state.d].power_atten : 0 : 0},
-      {  x: Unix_timestamp(this.state.uplink.length ? this.state.uplink[this.state.c].timestamp ? this.state.uplink[this.state.c].timestamp : 0 : 0), y: this.state.uplink.length ? this.state.uplink[this.state.c].power_atten ? this.state.uplink[this.state.c].power_atten : 0 : 0, label: this.state.uplink.length ? this.state.uplink[this.state.c].power_atten ? this.state.uplink[this.state.c].power_atten : 0 : 0},
-      {  x: Unix_timestamp(this.state.uplink.length ? this.state.uplink[this.state.b].timestamp ? this.state.uplink[this.state.b].timestamp : 0 : 0), y: this.state.uplink.length ? this.state.uplink[this.state.b].power_atten ? this.state.uplink[this.state.b].power_atten : 0 : 0, label: this.state.uplink.length ? this.state.uplink[this.state.b].power_atten ? this.state.uplink[this.state.b].power_atten : 0 : 0},
-      {  x: Unix_timestamp(this.state.uplink.length ? this.state.uplink[this.state.a].timestamp ? this.state.uplink[this.state.a].timestamp : 0 : 0), y: this.state.uplink.length ? this.state.uplink[this.state.a].power_atten ? this.state.uplink[this.state.a].power_atten : 0 : 0, label: this.state.uplink.length ? this.state.uplink[this.state.a].power_atten ? this.state.uplink[this.state.a].power_atten : 0 : 0},
+    if (this.state.uplinkChart === 'yesterday') {
+         return [
+      {  x: Unix_timestamp(this.state.uplink.length ? this.state.uplink[this.state.yma].timestamp ? this.state.uplink[this.state.yma].timestamp : 0 : 0), y: this.state.uplink.length ? this.state.uplink[this.state.yma].power_atten ? this.state.uplink[this.state.yma].power_atten : 0 : 0, label: this.state.uplink.length ? this.state.uplink[this.state.yma].power_atten ? this.state.uplink[this.state.yma].power_atten : 0 : 0},
+      {  x: Unix_timestamp(this.state.uplink.length ? this.state.uplink[this.state.ymb].timestamp ? this.state.uplink[this.state.ymb].timestamp : 0 : 0), y: this.state.uplink.length ? this.state.uplink[this.state.ymb].power_atten ? this.state.uplink[this.state.ymb].power_atten : 0 : 0, label: this.state.uplink.length ? this.state.uplink[this.state.ymb].power_atten ? this.state.uplink[this.state.ymb].power_atten : 0 : 0},
+      {  x: Unix_timestamp(this.state.uplink.length ? this.state.uplink[this.state.ymc].timestamp ? this.state.uplink[this.state.ymc].timestamp : 0 : 0), y: this.state.uplink.length ? this.state.uplink[this.state.ymc].power_atten ? this.state.uplink[this.state.ymc].power_atten : 0 : 0, label: this.state.uplink.length ? this.state.uplink[this.state.ymc].power_atten ? this.state.uplink[this.state.ymc].power_atten : 0 : 0},
+      {  x: Unix_timestamp(this.state.uplink.length ? this.state.uplink[this.state.ymd].timestamp ? this.state.uplink[this.state.ymd].timestamp : 0 : 0), y: this.state.uplink.length ? this.state.uplink[this.state.ymd].power_atten ? this.state.uplink[this.state.ymd].power_atten : 0 : 0, label: this.state.uplink.length ? this.state.uplink[this.state.ymd].power_atten ? this.state.uplink[this.state.ymd].power_atten : 0 : 0},
+      {  x: Unix_timestamp(this.state.uplink.length ? this.state.uplink[this.state.yme].timestamp ? this.state.uplink[this.state.yme].timestamp : 0 : 0), y: this.state.uplink.length ? this.state.uplink[this.state.yme].power_atten ? this.state.uplink[this.state.yme].power_atten : 0 : 0, label: this.state.uplink.length ? this.state.uplink[this.state.yme].power_atten ? this.state.uplink[this.state.yme].power_atten : 0 : 0},
+      {  x: Unix_timestamp(this.state.uplink.length ? this.state.uplink[this.state.ymf].timestamp ? this.state.uplink[this.state.ymf].timestamp : 0 : 0), y: this.state.uplink.length ? this.state.uplink[this.state.ymf].power_atten ? this.state.uplink[this.state.ymf].power_atten : 0 : 0, label: this.state.uplink.length ? this.state.uplink[this.state.ymf].power_atten ? this.state.uplink[this.state.ymf].power_atten : 0 : 0},
+      {  x: Unix_timestamp(this.state.uplink.length ? this.state.uplink[this.state.ymg].timestamp ? this.state.uplink[this.state.ymg].timestamp : 0 : 0), y: this.state.uplink.length ? this.state.uplink[this.state.ymg].power_atten ? this.state.uplink[this.state.ymg].power_atten : 0 : 0, label: this.state.uplink.length ? this.state.uplink[this.state.ymg].power_atten ? this.state.uplink[this.state.ymg].power_atten : 0 : 0}
       ]
-  }
+    }
+     else { const arraytod = [];
+          if (this.state.uplink.length > 20) {
+          for(let i = this.state.uplink.length - 21;i<this.state.uplink.length;i++) {
+              if (this.state.uplink[i].scrap_id == this.state.id) {
+                  arraytod.push({  x: Unix_timestamp(this.state.uplink.length ? this.state.uplink[i].timestamp ? this.state.uplink[i].timestamp : 0 : 0), y: this.state.uplink.length ? this.state.uplink[i].power_atten ? this.state.uplink[i].power_atten : 0 : 0, label: this.state.uplink.length ? this.state.uplink[i].power_atten ? this.state.uplink[i].power_atten : 0 : 0})
+                }
+            }
+          }
+              if (this.state.uplink.length < 21 && this.state.uplink.length > 0) {
+          for(let i = 0;i<this.state.uplink.length;i++) {
+              if (this.state.uplink[i].scrap_id == this.state.id) {
+                  arraytod.push({  x: Unix_timestamp(this.state.uplink.length ? this.state.uplink[i].timestamp ? this.state.uplink[i].timestamp : 0 : 0), y: this.state.uplink.length ? this.state.uplink[i].power_atten ? this.state.uplink[i].power_atten : 0 : 0, label: this.state.uplink.length ? this.state.uplink[i].power_atten ? this.state.uplink[i].power_atten : 0 : 0})
+                }
+            }
+          }
+          if (arraytod.length > 0) {
+            return arraytod
+        }
+      }
+    }
   render() {
       if(this.state.isLoading1 || this.state.isLoading2 || this.state.isLoading3){
         return <View><Text>Loading...</Text></View>
@@ -396,75 +494,77 @@ class Dashboard extends Component {
                 >
                     <Picker.Item label="Modem 1" value="m1" />
                     <Picker.Item label="Modem 2" value="m2" />
-                    <Picker.Item label="Modem 3" value="m3" />
+                    <Picker.Item label="Kantor Desa Lasara Idanoi" value="m3" />
                 </Picker>
           </View>
 
           <Block row style={[styles.margin, { marginTop: 18 }]}>
             <Card middle style={{ marginRight: 7 }}>
+            <View style={{padding:10}}>
               <Icon sqf />
               {
                 this.state.downlinkChart === 'week'
                 ?
                 <Text h2 style={{ marginTop: 17 }}>{this.state.downlink.length ? this.state.downlink[6].sqf : 0}</Text>
                 :
-                <Text h2 style={{ marginTop: 17 }}>{this.state.downlink.length ? this.state.downlink[this.state.e].sqf : 0}</Text>
+                <Text h2 style={{ marginTop: 17 }}>{this.state.downlink.length ? this.state.downlink[this.state.lastvar].sqf : 0}</Text>
               }
               <Text paragraph color="gray">LATEST SQF</Text>
               {
                 this.state.downlinkChart === 'week'
                 ?
-                <Text paragraph color="blue">{Nowdate(this.state.downlink.length ? this.state.downlink[6].timestamp : 0)}</Text>
+                <Text paragraph color="blue">{this.state.downlink.length ? this.state.downlink[6].timestamp : 0}</Text>
                 :
-                <Text paragraph color="blue">{Nowdate(this.state.downlink.length ? this.state.downlink[this.state.e].timestamp : 0)}</Text>
+                <Text paragraph color="blue">{Nowdate(this.state.downlink.length ? this.state.downlink[this.state.lastvar].timestamp : 0)}</Text>
               }
+            </View>
             </Card>
             
             <Card middle style={{ marginLeft: 7 }}>
+            <View style={{padding:10}}>
               <Icon attenuation />
               {
                 this.state.uplinkChart === 'week'
                 ?
                 <React.Fragment>
-                  <Text h2 style={{ marginTop: 17 }}>{this.state.uplink.length ? this.state.uplink[6].power_atten : 0}</Text>
+                  <Text h2 style={{ marginTop: 17, fontSize :30 }}>{this.state.uplink.length ? this.state.uplink[6].power_atten : 0}</Text>
                   <Text paragraph color="gray">LATEST ATTENUATION</Text>
-                  <Text paragraph color="blue">{Nowdate(this.state.uplink.length ? this.state.uplink[6].timestamp : 0)}</Text>
+                  <Text paragraph color="blue">{this.state.uplink.length ? this.state.uplink[6].timestamp : 0}</Text>
                 </React.Fragment>
                 :
                 <React.Fragment>
-                  <Text h2 style={{ marginTop: 17 }}>{this.state.uplink.length ? this.state.uplink[this.state.e].power_atten : 0}</Text>
+                  <Text h2 style={{ marginTop: 17, fontSize :30 }}>{this.state.uplink.length ? this.state.uplink[this.state.lastvar2].power_atten : 0}</Text>
                   <Text paragraph color="gray">LATEST ATTENUATION</Text>
-                  <Text paragraph color="blue">{Nowdate(this.state.uplink.length ? this.state.uplink[this.state.e].timestamp : 0)}</Text>
+                  <Text paragraph color="blue">{Nowdate(this.state.uplink.length ? this.state.uplink[this.state.lastvar2].timestamp : 0)}</Text>
                 </React.Fragment>
               }
+             </View> 
             </Card>
           </Block>
 
           <Block row style={[styles.margin, { marginTop: 18 }]}>
             <Card middle style={{ marginRight: 7 }}>
+            <View style={{padding:10}}>
               <Icon time />
-              <Text h2 style={{ marginTop: 17 }}>{this.state.modem[this.state.e].uptime}</Text>
+              <Text h2 style={{ marginTop: 17, fontSize :30 }}>{this.state.modem ? this.state.modem [this.state.lastvar3].uptime : 0}</Text>
               <Text paragraph color="gray">UPTIME</Text>
-              <Text paragraph color="blue">{Nowdate(this.state.modem[this.state.e].timestamp)}</Text>
+              <Text paragraph color="blue">{Nowdate(this.state.modem ? this.state. modem [this.state.lastvar3].timestamp: 0)}</Text>
+            </View>
             </Card>
             
             <Card middle style={{ marginLeft: 7 }}>
+            <View style={{padding:10}}>
               <Icon memory />
-              <Text h2 style={{ marginTop: 17 }}>{this.state.modem[this.state.e].memory}</Text>
+              <Text h2 style={{ marginTop: 17, fontSize :30 }}>{this.state.modem[this.state.lastvar3].memory}</Text>
               <Text paragraph color="gray">AVAILABLE MEMORY</Text>
-              {
-                this.state.downlinkChart === 'week'
-                ?
-                <Text paragraph color="blue">{Nowdate(this.state.downlink.length ? this.state.downlink[6].timestamp : 0)}</Text>
-                :
-                <Text paragraph color="blue">{Nowdate(this.state.downlink.length ? this.state.downlink[this.state.e].timestamp : 0)}</Text>
-              }
+              <Text paragraph color="blue">{Nowdate(this.state.modem[this.state.lastvar3].timestamp)}</Text>
+            </View>
             </Card>
           </Block>
               
           <Card
             title="SQF CHART"
-            style={[styles.margin, { marginTop: 18 }]}>
+            style={[styles.margin, { marginTop: 18 }, {padding:10}]}>
             <Block row right>
               <Block flex={2} row center right>
                 {
@@ -472,13 +572,12 @@ class Dashboard extends Component {
                   ?
                   <Text paragraph color="blue">{Nowdate(new Date() / 1000)}</Text>
                   :
-                  <Text paragraph color="blue">{Nowdate(this.state.downlink.length ? this.state.downlink[this.state.e].timestamp : new Date() / 1000)}</Text>
+                  <Text paragraph color="blue">{Nowdate(this.state.downlink.length ? this.state.downlink[this.state.lastvar].timestamp : new Date() / 1000)}</Text>
                 }
               </Block>
             </Block>
             <Block>
-              <Text>Chart</Text>
-               <VictoryChart width={300} minDomain={{ y: 100 }} maxDomain={{ y: 170 }} theme={VictoryTheme.material} domainPadding={15}>
+               <VictoryChart width={350} minDomain={{ y: 100 }} maxDomain={{ y: 170 }} theme={VictoryTheme.material} domainPadding={15}>
                 
                 <VictoryLine
 
@@ -512,7 +611,7 @@ class Dashboard extends Component {
           </Card>
           <Card
             title="ATTENUATION CHART"
-            style={[styles.margin, { marginTop: 18 }]}>
+            style={[styles.margin, { marginTop: 18 }, {padding:10}]}>
             <Block row right>
               <Block flex={2} row center right>
                 {
@@ -520,14 +619,12 @@ class Dashboard extends Component {
                   ?
                   <Text paragraph color="blue">{Nowdate(new Date() / 1000)}</Text>
                   :
-                  <Text paragraph color="blue">{Nowdate(this.state.downlink.length ? this.state.downlink[this.state.e].timestamp : new Date() / 1000)}</Text>
+                  <Text paragraph color="blue">{Nowdate(this.state.downlink.length ? this.state.downlink[this.state.lastvar2].timestamp : new Date() / 1000)}</Text>
                 }
               </Block>
               </Block>
             <Block>
-              <Text>Chart</Text>
-              <VictoryChart width={300} maxDomain={{ y: 5 }} theme={VictoryTheme.material} domainPadding={15}>
-                
+              <VictoryChart width={350} maxDomain={{ y: 7 }} theme={VictoryTheme.material} domainPadding={15}>
                 <VictoryLine
 
                     style={{
