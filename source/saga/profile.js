@@ -60,7 +60,7 @@ export function* editPassword(action) {
             method: 'put',
             headers: { 'Content-Type': 'application/json'},
             url: `${API_config.url}/api/user/password`,
-            data: convertJSONToForm(action.data)
+            data: action.data
         }
         );
 

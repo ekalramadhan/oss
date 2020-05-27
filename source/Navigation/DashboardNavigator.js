@@ -23,7 +23,7 @@ const DashboardNavigator = createStackNavigator({
         screen: DashboardScreen,
         navigationOptions: ({ navigation }) => { // di panggil ulang
             return{
-            headerTitle:() => <Header navigation = {navigation} headtitle = 'Dashboard OSS'/>, //untuk manggil header navigation header.js tapi masih gagal
+            headerTitle:() => <Header navigation = {navigation} headtitle = '    Dashboard '/>, //untuk manggil header navigation header.js tapi masih gagal
             }
         }
     },
@@ -34,7 +34,7 @@ const MapsNavigator = createStackNavigator({
         screen: MapsScreen,
         navigationOptions: ({ navigation }) => { // di panggil ulang
             return{
-            headerTitle:() => <Header navigation = {navigation} headtitle = 'Satellite Maps'/>, //untuk manggil header navigation header.js tapi masih gagal
+            headerTitle:() => <HeaderPage navigation = {navigation} title = 'Satellite Maps'/>, //untuk manggil header navigation header.js tapi masih gagal
             }
         }
     },
@@ -171,6 +171,22 @@ const DrawerNavigator = createDrawerNavigator(
             }
         },
 
+        Form: {
+            screen: ConfigurationFormNavigator,
+            navigationOptions: {
+                title: "Configuration Form",
+                drawerIcon: ({tintColor}) => <FontAwesome5 name="plus-square" size={21} color={tintColor}/>
+            }
+        },
+
+        MaintenanceForm: {
+            screen: MaintenanceFormNavigator,
+            navigationOptions: {
+                title: "Maintenance Request List",
+                drawerIcon: ({tintColor}) => <FontAwesome5 name="list-alt" size={21} color={tintColor}/>
+            }
+        },
+
         MyProfile: {
             screen: MyProfileNavigator,
             navigationOptions: {
@@ -187,21 +203,6 @@ const DrawerNavigator = createDrawerNavigator(
             }
         },
 
-        Form: {
-            screen: ConfigurationFormNavigator,
-            navigationOptions: {
-                title: "Configuration Form",
-                drawerIcon: ({tintColor}) => <FontAwesome5 name="plus-square" size={21} color={tintColor}/>
-            }
-        },
-
-        MaintenanceForm: {
-            screen: MaintenanceFormNavigator,
-            navigationOptions: {
-                title: "Maintenance Request List",
-                drawerIcon: ({tintColor}) => <FontAwesome5 name="list-alt" size={21} color={tintColor}/>
-            }
-        },
         Logout: {
             screen: LogoutNavigator,
             navigationOptions: {

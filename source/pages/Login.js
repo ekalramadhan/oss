@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
       fontSize: 20,
       alignItems: 'flex-end',
       justifyContent: 'center',
-      paddingVertical: 20,
+      paddingVertical: 50,
       flexDirection:'row'
     },
     signupText:{
@@ -179,7 +179,8 @@ const styles = StyleSheet.create({
       fontSize:16,
       fontWeight:"500",
       borderRadius:10,
-      padding: 10
+      padding: 10,
+      marginVertical:5
     },
     boxinput:{
       width:300,

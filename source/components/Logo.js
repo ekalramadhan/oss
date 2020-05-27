@@ -6,8 +6,8 @@ export default class Logo extends Component {
         return (
                 
                 <View style = {styles.container}>
-                    <Image style={{marginTop:60}}
-                    source = {require('../images/Logo-OSS-500.png')}/>
+                    <Image style={{marginTop:30}}
+                    source = {require('../images/Logo-OSS-400.png')}/>
                 </View>
         )
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, SafeAreaView, ScrollView, StyleSheet, Dimensions, View, Button, Picker} from 'react-native';
 import { LineChart } from "react-native-chart-kit";
-import { VictoryArea, VictoryBar, VictoryChart, VictoryTheme,VictoryLine } from "victory-native";
+import { VictoryArea, VictoryBar, VictoryChart, VictoryTheme, VictoryLine } from "victory-native";
 
 import { Block, Card, Text, Icon, Label } from '../components';
 import * as theme from '../constants/theme';
@@ -33,6 +33,18 @@ var hr = dt.getDate();
 var m = dt.getMonth();
 var s = dt.getFullYear();
 var time = hr + " " + monthNames[m] + " " + s;
+return time;  
+}
+
+function Nowdate2(t)
+{
+var dt = new Date(t*1000);
+var hr = dt.getDate();
+var m = dt.getMonth();
+var s = dt.getFullYear();
+var h = dt.getHours();
+var mi = dt.getMinutes();
+var time = hr + " " + monthNames[m] + " " + s + " " + h + ":"+ mi;
 return time;  
 }
 
@@ -532,7 +544,7 @@ testfunc() {
                 ?
                 <Text paragraph color="blue">{this.state.downlink.length ? this.state.downlink[6].timestamp : 0}</Text>
                 :
-                <Text paragraph color="blue">{Nowdate(this.state.downlink.length ? this.state.downlink[this.state.lastvar].timestamp : 0)}</Text>
+                <Text paragraph color="blue">{Nowdate2(this.state.downlink.length ? this.state.downlink[this.state.lastvar].timestamp : 0)}</Text>
               }
             </View>
             </Card>
@@ -552,7 +564,7 @@ testfunc() {
                 <React.Fragment>
                   <Text h2 style={{ marginTop: 17, fontSize :30 }}>{this.state.uplink.length ? this.state.uplink[this.state.lastvar2].power_atten : 0}</Text>
                   <Text paragraph color="gray">LATEST ATTENUATION</Text>
-                  <Text paragraph color="blue">{Nowdate(this.state.uplink.length ? this.state.uplink[this.state.lastvar2].timestamp : 0)}</Text>
+                  <Text paragraph color="blue">{Nowdate2(this.state.uplink.length ? this.state.uplink[this.state.lastvar2].timestamp : 0)}</Text>
                 </React.Fragment>
               }
              </View> 
@@ -565,7 +577,7 @@ testfunc() {
             <FontAwesome5 name="clock" size={50} color="gray" style={{marginHorizontal: 10}}/>
               <Text h2 style={{ marginTop: 17, fontSize :30 }}>{this.state.modem ? this.state.modem [this.state.lastvar3].uptime : 0}</Text>
               <Text paragraph color="gray">UPTIME</Text>
-              <Text paragraph color="blue">{Nowdate(this.state.modem ? this.state. modem [this.state.lastvar3].timestamp: 0)}</Text>
+              <Text paragraph color="blue">{Nowdate2(this.state.modem ? this.state. modem [this.state.lastvar3].timestamp: 0)}</Text>
             </View>
             </Card>
             
@@ -574,7 +586,7 @@ testfunc() {
             <FontAwesome5 name="memory" size={40} color="gray" style={{marginHorizontal: 10}}/>
               <Text h2 style={{ marginTop: 17, fontSize :28 }}>{this.state.modem[this.state.lastvar3].memory}</Text>
               <Text paragraph color="gray">AVAILABLE MEMORY</Text>
-              <Text paragraph color="blue">{Nowdate(this.state.modem[this.state.lastvar3].timestamp)}</Text>
+              <Text paragraph color="blue">{Nowdate2(this.state.modem[this.state.lastvar3].timestamp)}</Text>
             </View>
             </Card>
           </Block>

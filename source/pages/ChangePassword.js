@@ -31,8 +31,18 @@ class ChangePassword extends Component {
         if (this.props.profile !== null) {
           if (this.props.profile.status) {
             alert(this.props.profile.message)
+            this.setState({
+              currentpass: "",
+              newpass: "",
+              confirmpass: "",
+            })
           }else{
             alert(this.props.profile.message)
+            this.setState({
+              currentpass: "",
+              newpass: "",
+              confirmpass: "",
+            })
           }
         }
       }
@@ -45,7 +55,7 @@ class ChangePassword extends Component {
       onChangePassword = () => {
         if (this.state.newpass === this.state.confirmpass) {
           let data = {
-            email: this.props.user,
+            email: this.props.user.email,
             current_password: this.state.currentpass,
             new_password: this.state.newpass,
             token: API_config.token
@@ -65,6 +75,7 @@ class ChangePassword extends Component {
                   <TextInput
                     name="Current Password"
                     //placeholder="Current Password"
+                    value={this.state.currentpass}
                     secureTextEntry={true}
                     component={this.renderTextInput}
                     placeholderTextColor="#ffff"
@@ -76,6 +87,7 @@ class ChangePassword extends Component {
                 <View style = {styles.boxinput}>
                   <TextInput
                     name="New Password"
+                    value={this.state.newpass}
                     secureTextEntry={true}
                     //placeholder="New Password"
                     component={this.renderTextInput}
@@ -88,6 +100,7 @@ class ChangePassword extends Component {
                 <View style = {styles.boxinput}>
                   <TextInput 
                     name="Confirm New Password"
+                    value={this.state.confirmpass}
                     secureTextEntry={true}
                     //placeholder="Password"
                     component={this.renderTextInput} 
