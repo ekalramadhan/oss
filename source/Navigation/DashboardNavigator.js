@@ -215,7 +215,7 @@ const DrawerNavigator = createDrawerNavigator(
         contentComponent: props => <SideBar {...props}/>,
         contentOptions: {
             activeTintColor: "#fff",
-            activeBackgroundColor : 'blue',
+            activeBackgroundColor : '#002171',
         }
     }
 );

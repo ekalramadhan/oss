@@ -11,7 +11,7 @@ export default Sidebar = props => (
             style={{width: undefined, padding: 16, paddingTop: 48 }}
         >
             <Image 
-                source={require('../images/Logo2_resize.png')}
+                source={require('../images/Logo-OSS.png')}
                 style = {styles.logo} />
         </ImageBackground>  
 

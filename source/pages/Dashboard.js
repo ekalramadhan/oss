@@ -571,7 +571,7 @@ testfunc() {
             <Card middle style={{ marginLeft: 7 }}>
             <View style={{padding:10}}>
               <Icon memory />
-              <Text h2 style={{ marginTop: 17, fontSize :30 }}>{this.state.modem[this.state.lastvar3].memory}</Text>
+              <Text h2 style={{ marginTop: 17, fontSize :28 }}>{this.state.modem[this.state.lastvar3].memory}</Text>
               <Text paragraph color="gray">AVAILABLE MEMORY</Text>
               <Text paragraph color="blue">{Nowdate(this.state.modem[this.state.lastvar3].timestamp)}</Text>
             </View>

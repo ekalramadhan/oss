@@ -149,7 +149,7 @@ class Login extends Component {
 const styles = StyleSheet.create({
     container: {
       flexGrow: 1,
-      backgroundColor: '#4285F4',
+      backgroundColor: '#002171',
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
       fontSize: 20,
       alignItems: 'flex-end',
       justifyContent: 'center',
-      paddingVertical: 15,
+      paddingVertical: 20,
       flexDirection:'row'
     },
     signupText:{
@@ -169,13 +169,13 @@ const styles = StyleSheet.create({
       fontFamily:'Rubik-Regular',
       fontSize:16,
       fontWeight:"bold",
-      color:'#87cefa'
+      color:'#fff'
     },
     button:{
       width:300,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: '#002171',
+      backgroundColor: '#4285F4',
       fontSize:16,
       fontWeight:"500",
       borderRadius:10,
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
       marginVertical:5,
     },
     signupButton:{
-      color:'#87cefa',
+      color:'#fff',
       fontSize:14,
       fontWeight:'500'
     }
