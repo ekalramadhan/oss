@@ -11,7 +11,6 @@ import DashboardScreen from '../pages/Dashboard';
 import SideBar from '../components/SideBar';
 import MyProfileScreen from '../pages/MyProfile';
 import ChangePasswordScreen from '../pages/ChangePassword';
-import EditProfileScreen from '../pages/EditProfile';
 import ConfigurationFormScreen from '../pages/Form';
 import MaintenanceFormScreen from '../pages/MaintenanceForm';
 import Logout from '../pages/Logout';
