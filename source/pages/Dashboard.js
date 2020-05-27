@@ -9,6 +9,7 @@ import API_config from '../config/API_config';
 import { bindActionCreators } from 'redux';
 import { getDownlink, getUplink, getModem, getHeadline } from '../action/dashboard';
 import { getAsyncStorage } from '../action/asyncStorage';
+import { FontAwesome5 } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
 const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -517,13 +518,13 @@ testfunc() {
           <Block row style={[styles.margin, { marginTop: 18 }]}>
             <Card middle style={{ marginRight: 7 }}>
             <View style={{padding:10}}>
-              <Icon sqf />
+            <FontAwesome5 name="signal" size={40} color="gray"/>
               {
                 this.state.downlinkChart === 'week'
                 ?
-                <Text h2 style={{ marginTop: 17 }}>{this.state.downlink.length ? this.state.downlink[6].sqf : 0}</Text>
+                <Text h2 style={{ marginTop: 17, fontSize :30 }}>{this.state.downlink.length ? this.state.downlink[6].sqf : 0}</Text>
                 :
-                <Text h2 style={{ marginTop: 17 }}>{this.state.downlink.length ? this.state.downlink[this.state.lastvar].sqf : 0}</Text>
+                <Text h2 style={{ marginTop: 17, fontSize :30 }}>{this.state.downlink.length ? this.state.downlink[this.state.lastvar].sqf : 0}</Text>
               }
               <Text paragraph color="gray">LATEST SQF</Text>
               {
@@ -538,7 +539,7 @@ testfunc() {
             
             <Card middle style={{ marginLeft: 7 }}>
             <View style={{padding:10}}>
-              <Icon attenuation />
+            <FontAwesome5 name="broadcast-tower" size={44} color="gray" />
               {
                 this.state.uplinkChart === 'week'
                 ?
@@ -561,7 +562,7 @@ testfunc() {
           <Block row style={[styles.margin, { marginTop: 18 }]}>
             <Card middle style={{ marginRight: 7 }}>
             <View style={{padding:10}}>
-              <Icon time />
+            <FontAwesome5 name="clock" size={50} color="gray" style={{marginHorizontal: 10}}/>
               <Text h2 style={{ marginTop: 17, fontSize :30 }}>{this.state.modem ? this.state.modem [this.state.lastvar3].uptime : 0}</Text>
               <Text paragraph color="gray">UPTIME</Text>
               <Text paragraph color="blue">{Nowdate(this.state.modem ? this.state. modem [this.state.lastvar3].timestamp: 0)}</Text>
@@ -570,7 +571,7 @@ testfunc() {
             
             <Card middle style={{ marginLeft: 7 }}>
             <View style={{padding:10}}>
-              <Icon memory />
+            <FontAwesome5 name="memory" size={40} color="gray" style={{marginHorizontal: 10}}/>
               <Text h2 style={{ marginTop: 17, fontSize :28 }}>{this.state.modem[this.state.lastvar3].memory}</Text>
               <Text paragraph color="gray">AVAILABLE MEMORY</Text>
               <Text paragraph color="blue">{Nowdate(this.state.modem[this.state.lastvar3].timestamp)}</Text>
