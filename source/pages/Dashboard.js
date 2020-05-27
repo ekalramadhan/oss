@@ -509,8 +509,8 @@ testfunc() {
                     mode='dropdown'
                     onValueChange={this.updateRouter}
                 >
-                    <Picker.Item label="Modem 15" value="m1" />
-                    <Picker.Item label="Modem 16" value="m2" />
+                    <Picker.Item label="Desa Aek Bonban" value="m1" />
+                    <Picker.Item label="Desa Jenggala" value="m2" />
                     <Picker.Item label="Kantor Desa Lasara Idanoi" value="m3" />
                 </Picker>
           </View>
@@ -518,7 +518,7 @@ testfunc() {
           <Block row style={[styles.margin, { marginTop: 18 }]}>
             <Card middle style={{ marginRight: 7 }}>
             <View style={{padding:10}}>
-            <FontAwesome5 name="signal" size={40} color="gray"/>
+            <FontAwesome5 name="signal" size={40} color="gray" style={{marginHorizontal: 10}}/>
               {
                 this.state.downlinkChart === 'week'
                 ?
@@ -539,7 +539,7 @@ testfunc() {
             
             <Card middle style={{ marginLeft: 7 }}>
             <View style={{padding:10}}>
-            <FontAwesome5 name="broadcast-tower" size={44} color="gray" />
+            <FontAwesome5 name="broadcast-tower" size={44} color="gray" style={{marginHorizontal: 10}}/>
               {
                 this.state.uplinkChart === 'week'
                 ?
