@@ -176,12 +176,12 @@ class Dashboard extends Component {
       yme: 90,
       ymf: 108,
       ymg: 126,
-      id: 1,
+      id: 15,
       SampleArray: [],
-      lastvar: 0,
-      lastvar2: 0,
-      lastvar3: 0,
-      lastvar4: 0,
+      lastvar: 2,
+      lastvar2: 2,
+      lastvar3: 2,
+      lastvar4: 1,
     }
   } 
 
@@ -199,12 +199,13 @@ class Dashboard extends Component {
       yme: 90,
       ymf: 108,
       ymg: 126,
-      id: 1,
+      id: 15,
       modemnow : "Modem 1",
-      lastvar: this.state.downlink.length - 3,
-      lastvar2: this.state.uplink.length - 3,
-      lastvar3: this.state.modem.length - 3,
-    })
+      lastvar: this.state.downlink.length - 2,
+      lastvar2: this.state.uplink.length - 2,
+      lastvar3: this.state.modem.length - 2,
+    },function() {if (this.state.uplinkChart === 'week') { this.getUplink('week') }
+      if (this.state.downlinkChart === 'week') { this.getDownlink('week') }})
   }
 
   updateRouter2 = () => {
@@ -221,12 +222,14 @@ class Dashboard extends Component {
       yme: 91,
       ymf: 109,
       ymg: 127,
-      id: 2,
+      id: 16,
       modemnow : "Modem 2",
-      lastvar: this.state.downlink.length - 2,
-      lastvar2: this.state.uplink.length - 2,
-      lastvar3: this.state.modem.length - 2,
-    })
+      lastvar: this.state.downlink.length - 1,
+      lastvar2: this.state.uplink.length - 1,
+      lastvar3: this.state.modem.length - 1,
+    },function() {if (this.state.uplinkChart === 'week') { this.getUplink('week') }
+      if (this.state.downlinkChart === 'week') { this.getDownlink('week') }})
+
   }
 
   updateRouter3 = () => {
@@ -245,20 +248,22 @@ class Dashboard extends Component {
       ymg: 128,
       id: 3,
         modemnow : "Modem 3",
-        lastvar: this.state.downlink.length - 1,
-        lastvar2: this.state.uplink.length - 1,
-        lastvar3: this.state.modem.length - 1,
-      })
+      }, function() {this.setState({         lastvar: this.state.downlink.length - 3,
+        lastvar2: this.state.uplink.length - 3,
+        lastvar3: this.state.modem.length - 3}); if (this.state.uplinkChart === 'week') { this.getUplink('week') }
+      if (this.state.downlinkChart === 'week') { this.getDownlink('week') }})
   }
+
+testfunc() {
+      if (this.state.uplinkChart === 'week') { this.getUplink('week') }
+      if (this.state.downlinkChart === 'week') { this.getDownlink('week') }
+}
 
   componentDidMount() {
     this.getDownlink();
     this.getUplink();
     this.getModem();
     this.getHeadline();
-    if (this.state.downlink.length > 0 && this.state.uplink.length > 0 && this.state.modem.length > 0){
-   this.setState({lastvar: this.state.downlink.length - 3, lastvar2: this.state.uplink.length - 3, lastvar3: this.state.modem.length - 3})
- }
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -267,7 +272,8 @@ class Dashboard extends Component {
         if (this.props.downlink) {
           this.setState({
             downlink: this.props.downlink.data,
-            isLoading1: false
+            isLoading1: false,
+            lastvar: this.props.downlink.data.length - 2, 
           })
         }
       }
@@ -277,7 +283,8 @@ class Dashboard extends Component {
         if (this.props.uplink) {
           this.setState({
             uplink: this.props.uplink.data,
-            isLoading2: false
+            isLoading2: false,
+            lastvar2: this.props.uplink.data.length - 2,
           })
         }
       }
@@ -287,7 +294,8 @@ class Dashboard extends Component {
         if (this.props.modem.status) {
           this.setState({
             modem: this.props.modem.data,
-            isLoading3: false
+            isLoading3: false,
+            lastvar3: this.props.modem.data.length - 2,
           })
         }
       }
@@ -308,7 +316,14 @@ class Dashboard extends Component {
       data = {
         token: API_config.token
       }
-    }else{
+    }
+    if (type === 'week') {
+      data = {
+        token: API_config.token,
+        type: type,
+        id: this.state.id
+      }
+      }else{
       data = {
         token: API_config.token,
         type: type
@@ -390,17 +405,18 @@ class Dashboard extends Component {
     },
   }
 
+
   dataDownlink = () => {
     if (this.state.downlinkChart === 'week') {
       return [
+          {  x: this.state.downlink.length ? this.state.downlink[0].timestamp : 0, y: parseInt(this.state.downlink.length ? this.state.downlink[0].sqf ? this.state.downlink[0].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[0].sqf ? this.state.downlink[0].sqf : 0 : 0},
+          {  x: this.state.downlink.length ? this.state.downlink[1].timestamp : 0, y: parseInt(this.state.downlink.length ? this.state.downlink[1].sqf ? this.state.downlink[1].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[1].sqf ? this.state.downlink[1].sqf : 0 : 0},
           {  x: this.state.downlink.length ? this.state.downlink[2].timestamp : 0, y: parseInt(this.state.downlink.length ? this.state.downlink[2].sqf ? this.state.downlink[2].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[2].sqf ? this.state.downlink[2].sqf : 0 : 0},
           {  x: this.state.downlink.length ? this.state.downlink[3].timestamp : 0, y: parseInt(this.state.downlink.length ? this.state.downlink[3].sqf ? this.state.downlink[3].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[3].sqf ? this.state.downlink[3].sqf : 0 : 0},
           {  x: this.state.downlink.length ? this.state.downlink[4].timestamp : 0, y: parseInt(this.state.downlink.length ? this.state.downlink[4].sqf ? this.state.downlink[4].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[4].sqf ? this.state.downlink[4].sqf : 0 : 0},
           {  x: this.state.downlink.length ? this.state.downlink[5].timestamp : 0, y: parseInt(this.state.downlink.length ? this.state.downlink[5].sqf ? this.state.downlink[5].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[5].sqf ? this.state.downlink[5].sqf : 0 : 0},
           {  x: this.state.downlink.length ? this.state.downlink[6].timestamp : 0, y: parseInt(this.state.downlink.length ? this.state.downlink[6].sqf ? this.state.downlink[6].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[6].sqf ? this.state.downlink[6].sqf : 0 : 0},
-          //{  x: this.state.downlink.length ? this.state.downlink[7].timestamp : 0, y: parseInt(this.state.downlink.length ? this.state.downlink[7].sqf ? this.state.downlink[7].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[7].sqf ? this.state.downlink[7].sqf : 0 : 0},
-          //{  x: this.state.downlink.length ? this.state.downlink[8].timestamp : 0, y: parseInt(this.state.downlink.length ? this.state.downlink[8].sqf ? this.state.downlink[8].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[8].sqf ? this.state.downlink[8].sqf : 0 : 0}
-          ]
+]
     }  if (this.state.downlinkChart === 'yesterday') {
       return [
         {  x: Unix_timestamp(this.state.downlink.length ? this.state.downlink[this.state.yma].timestamp ? this.state.downlink[this.state.yma].timestamp : 0 : 0), y: parseInt(this.state.downlink.length ? this.state.downlink[this.state.yma].sqf ? this.state.downlink[this.state.yma].sqf : 0 : 0), label: this.state.downlink.length ? this.state.downlink[this.state.yma].sqf ? this.state.downlink[this.state.yma].sqf : 0 : 0},
@@ -437,14 +453,14 @@ class Dashboard extends Component {
   dataUplink = () => {
     if (this.state.uplinkChart === 'week') {
       return [
+        {  x: this.state.uplink.length ? this.state.uplink[0].timestamp  : 0, y: this.state.uplink.length ? this.state.uplink[0].power_atten : 0, label: this.state.uplink.length ? this.state.uplink[0].power_atten : 0},
+        {  x: this.state.uplink.length ? this.state.uplink[1].timestamp  : 0, y: this.state.uplink.length ? this.state.uplink[1].power_atten : 0, label: this.state.uplink.length ? this.state.uplink[1].power_atten : 0},
         {  x: this.state.uplink.length ? this.state.uplink[2].timestamp  : 0, y: this.state.uplink.length ? this.state.uplink[2].power_atten : 0, label: this.state.uplink.length ? this.state.uplink[2].power_atten : 0},
         {  x: this.state.uplink.length ? this.state.uplink[3].timestamp  : 0, y: this.state.uplink.length ? this.state.uplink[3].power_atten : 0, label: this.state.uplink.length ? this.state.uplink[3].power_atten : 0},
         {  x: this.state.uplink.length ? this.state.uplink[4].timestamp  : 0, y: this.state.uplink.length ? this.state.uplink[4].power_atten : 0, label: this.state.uplink.length ? this.state.uplink[4].power_atten : 0},
         {  x: this.state.uplink.length ? this.state.uplink[5].timestamp  : 0, y: this.state.uplink.length ? this.state.uplink[5].power_atten : 0, label: this.state.uplink.length ? this.state.uplink[5].power_atten : 0},
         {  x: this.state.uplink.length ? this.state.uplink[6].timestamp  : 0, y: this.state.uplink.length ? this.state.uplink[6].power_atten : 0, label: this.state.uplink.length ? this.state.uplink[6].power_atten : 0},
-        //{  x: this.state.uplink.length ? this.state.uplink[7].timestamp  : 0, y: this.state.uplink.length ? this.state.uplink[7].power_atten : 0, label: this.state.uplink.length ? this.state.uplink[7].power_atten : 0},
-        //{  x: this.state.uplink.length ? this.state.uplink[8].timestamp  : 0, y: this.state.uplink.length ? this.state.uplink[8].power_atten : 0, label: this.state.uplink.length ? this.state.uplink[8].power_atten : 0}
-        ]
+         ]
     }
     if (this.state.uplinkChart === 'yesterday') {
          return [
@@ -483,7 +499,7 @@ class Dashboard extends Component {
       }
 
     return (
-      <SafeAreaView style={styles.overview}>
+           <SafeAreaView style={styles.overview}>
         <ScrollView contentContainerStyle={{ paddingVertical: 25 }}>
           <View style = {styles.inputBox}>
                 <Picker
@@ -492,8 +508,8 @@ class Dashboard extends Component {
                     mode='dropdown'
                     onValueChange={this.updateRouter}
                 >
-                    <Picker.Item label="Modem 1" value="m1" />
-                    <Picker.Item label="Modem 2" value="m2" />
+                    <Picker.Item label="Modem 15" value="m1" />
+                    <Picker.Item label="Modem 16" value="m2" />
                     <Picker.Item label="Kantor Desa Lasara Idanoi" value="m3" />
                 </Picker>
           </View>
@@ -577,7 +593,7 @@ class Dashboard extends Component {
               </Block>
             </Block>
             <Block>
-               <VictoryChart width={350} minDomain={{ y: 100 }} maxDomain={{ y: 170 }} theme={VictoryTheme.material} domainPadding={15}>
+               <VictoryChart width={375} minDomain={{ y: 100 }} maxDomain={{ y: 170 }} theme={VictoryTheme.material} domainPadding={15}>
                 
                 <VictoryLine
 
@@ -619,12 +635,12 @@ class Dashboard extends Component {
                   ?
                   <Text paragraph color="blue">{Nowdate(new Date() / 1000)}</Text>
                   :
-                  <Text paragraph color="blue">{Nowdate(this.state.downlink.length ? this.state.downlink[this.state.lastvar2].timestamp : new Date() / 1000)}</Text>
+                  <Text paragraph color="blue">{Nowdate(this.state.uplink.length ? this.state.uplink[this.state.lastvar2].timestamp : new Date() / 1000)}</Text>
                 }
               </Block>
               </Block>
             <Block>
-              <VictoryChart width={350} maxDomain={{ y: 7 }} theme={VictoryTheme.material} domainPadding={15}>
+              <VictoryChart width={375} maxDomain={{ y: 7 }} theme={VictoryTheme.material} domainPadding={15}>
                 <VictoryLine
 
                     style={{
