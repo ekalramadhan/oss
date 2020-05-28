@@ -111,7 +111,7 @@ class MyProfile extends Component {
                     this.props.profile && this.props.profile.status
                     ?
                     <React.Fragment>
-                      <Image style = {styles.imgprofile} source={require('../images/Profile.png')}/>
+                      <Image style = {styles.imgprofile} source={require('../images/Profile4.png')}/>
                       {
                         this.state.edit
                         ?
