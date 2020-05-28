@@ -3,7 +3,12 @@ import LoginScreen from '../pages/Login';
 import SignupScreen from '../pages/Signup';
 
 const AuthStack = createStackNavigator ({
-    Login : LoginScreen,
+    Login : {
+    screen: LoginScreen,
+    navigationOptions: {
+        headerShown: false,
+    }
+},
 });
 
 export default AuthStack;

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity, KeyboardAvoidingView, AsyncStorage, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, AsyncStorage, ActivityIndicator } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import { Block, Card, Text, Icon, Label } from '../components';
 import Logo from '../components/Logo';
@@ -100,8 +100,10 @@ class Login extends Component {
   render() {
       const {navigate} = this.props.navigation;
       return(
+            <KeyboardAvoidingView style= {styles.container}>
+              <ScrollView>
               <View style = {styles.container}>
-                <Logo/> 
+                <Image style = {{marginTop:30}} source = {require('../images/Logo-OSS-400.png')}/>
                 
                   <View style = {styles.boxinput}>
                     <TextInput
@@ -142,6 +144,8 @@ class Login extends Component {
                   </TouchableOpacity>
               </View>
             </View>
+            </ScrollView>
+          </KeyboardAvoidingView>
       )
   }
 }
@@ -151,12 +155,12 @@ const styles = StyleSheet.create({
       flexGrow: 1,
       backgroundColor: '#002171',
       alignItems: 'center',
-      justifyContent: 'center',
+      //justifyContent: 'center',
     },
     signupTextBorder: {
       flexGrow: 1,
       fontSize: 20,
-      alignItems: 'flex-end',
+      //alignItems: 'flex-end',
       justifyContent: 'center',
       paddingVertical: 80,
       flexDirection:'row'

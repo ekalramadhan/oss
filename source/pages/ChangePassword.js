@@ -122,11 +122,11 @@ class ChangePassword extends Component {
       container: {
         flexGrow: 1,
         backgroundColor: '#edf2f7',
+        alignItems: 'center',
         
       },
       labeluser: {
         fontSize: 15,
-        marginLeft:50,
         //fontWeight:"bold",
         color:'#000000'
       },
@@ -144,7 +144,6 @@ class ChangePassword extends Component {
         borderRadius:10,
         paddingVertical:15,
         paddingHorizontal:20,
-        marginLeft:50,
         marginTop: 30
       },
       boxinput:{
@@ -157,7 +156,7 @@ class ChangePassword extends Component {
         paddingHorizontal:20,
         fontSize:16,
         marginVertical:8,
-        marginLeft:50
+ 
       }
   });
 

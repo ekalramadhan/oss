@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, TextInput, View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, TextInput, View, TouchableOpacity, Image, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import { Field, reduxForm } from 'redux-form';
-
+import { ScrollView } from 'react-native-gesture-handler';
 import Logo from '../components/Logo';
 import InputText from '../components/InputText';
 import { onChange } from 'react-native-reanimated';
@@ -116,8 +116,10 @@ class Signup extends Component {
       console.log(this.props)
         const { navigate } = this.props.navigation;
         return(
+          <KeyboardAvoidingView style= {styles.container}>
+            <ScrollView>
             <View style= {styles.container}>
-                <Logo/>
+                <Image style = {{marginTop:30}}source = {require('../images/Logo-OSS-400.png')}/>
 
                 <View style = {styles.boxinput}>
                   <TextInput
@@ -167,6 +169,8 @@ class Signup extends Component {
                     </TouchableOpacity>
                 </View>
             </View>
+            </ScrollView>
+          </KeyboardAvoidingView>
         )
     }
 }
@@ -192,12 +196,12 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: '#002171',
     alignItems: 'center',
-    justifyContent: 'center',
+    //ustifyContent: 'center',
   },
   signupTextBorder: {
     flexGrow: 1,
     fontSize: 20,
-    alignItems: 'flex-end',
+    //alignItems: 'flex-end',
     justifyContent: 'center',
     paddingVertical: 80,
     flexDirection:'row'

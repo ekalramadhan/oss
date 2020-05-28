@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Operations-Support-Systems",
-    "slug": "Operations-Support-Systems",
+    "name": "TAOSS",
+    "slug": "TAOSS",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
@@ -11,7 +11,7 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./source/images/iconfix.png",
+    "icon": "./source/images/logo-icon.png",
     "splash": {
       "image": "./source/images/splashfix.png",
       "resizeMode": "contain",
@@ -24,10 +24,14 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.TA14.TAOSS",
+      "buildNumber": "1.0.1"
     },
     "android": {
-      "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"] 
+      "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"],
+      "package": "com.TA14.TAOSS",
+      "versionCode": 2 
     }
   }
 }
