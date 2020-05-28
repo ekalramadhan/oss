@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     alignItems: 'flex-end',
     justifyContent: 'center',
-    paddingVertical: 60,
+    paddingVertical: 80,
     flexDirection:'row'
   },
   signupText:{

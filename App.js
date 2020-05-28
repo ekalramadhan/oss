@@ -21,6 +21,8 @@ import AppNavigator from "./source/Navigation/AppNavigator";
 import { AppLoading, Icon } from "expo";
 import * as Font from "expo-font";
 
+console.disableYellowBox = true
+
 const persistStore = persist(); 
 
 export default class App extends Component {
