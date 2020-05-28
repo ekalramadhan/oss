@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, SafeAreaView, ScrollView, StyleSheet, Dimensions, View, Button, Picker} from 'react-native';
 import { LineChart } from "react-native-chart-kit";
-import { VictoryArea, VictoryBar, VictoryChart, VictoryTheme, VictoryLine } from "victory-native";
+import { VictoryArea, VictoryBar, VictoryChart, VictoryTheme,VictoryLine } from "victory-native";
 
 import { Block, Card, Text, Icon, Label } from '../components';
 import * as theme from '../constants/theme';
@@ -165,12 +165,6 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      a : 14,
-      b : 13,
-      c : 12,
-      d : 11,
-      e : 10,
-      modemnow : "Modem 1",
       data: [],
       isLoading1: true,
       isLoading2: true,
@@ -182,13 +176,13 @@ class Dashboard extends Component {
       router: '',
       downlinkChart: 'today',
       uplinkChart: 'today',
-      yma: 18,
-      ymb: 36,
-      ymc: 54,
-      ymd: 72,
-      yme: 90,
-      ymf: 108,
-      ymg: 126,
+      yma: 33,
+      ymb: 63,
+      ymc: 93,
+      ymd: 123,
+      yme: 153,
+      ymf: 183,
+      ymg: 213,
       id: 15,
       SampleArray: [],
       lastvar: 2,
@@ -200,20 +194,14 @@ class Dashboard extends Component {
 
   updateRouter1 = () => {
     this.setState({     
-      a : 14,
-      b : 13,
-      c : 12,
-      d : 11,
-      e : 10,
-      yma: 18,
-      ymb: 36,
-      ymc: 54,
-      ymd: 72,
-      yme: 90,
-      ymf: 108,
-      ymg: 126,
+      yma: 33,
+      ymb: 63,
+      ymc: 93,
+      ymd: 123,
+      yme: 153,
+      ymf: 183,
+      ymg: 213,
       id: 15,
-      modemnow : "Modem 1",
       lastvar: this.state.downlink.length - 2,
       lastvar2: this.state.uplink.length - 2,
       lastvar3: this.state.modem.length - 2,
@@ -223,20 +211,14 @@ class Dashboard extends Component {
 
   updateRouter2 = () => {
     this.setState({     
-      a : 9,
-      b : 8,
-      c : 7,
-      d : 6,
-      e : 5,
-      yma: 19,
-      ymb: 37,
-      ymc: 55,
-      ymd: 73,
-      yme: 91,
-      ymf: 109,
-      ymg: 127,
+      yma: 34,
+      ymb: 64,
+      ymc: 94,
+      ymd: 124,
+      yme: 154,
+      ymf: 184,
+      ymg: 214,
       id: 16,
-      modemnow : "Modem 2",
       lastvar: this.state.downlink.length - 1,
       lastvar2: this.state.uplink.length - 1,
       lastvar3: this.state.modem.length - 1,
@@ -247,23 +229,49 @@ class Dashboard extends Component {
 
   updateRouter3 = () => {
     this.setState({     
-        a : 4,
-        b : 3,
-        c : 2,
-        d : 1,
-        e : 0,
-      yma: 20,
-      ymb: 38,
-      ymc: 56,
-      ymd: 74,
-      yme: 92,
-      ymf: 110,
-      ymg: 128,
+      yma: 32,
+      ymb: 62,
+      ymc: 92,
+      ymd: 122,
+      yme: 152,
+      ymf: 182,
+      ymg: 212,
       id: 3,
-        modemnow : "Modem 3",
       }, function() {this.setState({         lastvar: this.state.downlink.length - 3,
         lastvar2: this.state.uplink.length - 3,
         lastvar3: this.state.modem.length - 3}); if (this.state.uplinkChart === 'week') { this.getUplink('week') }
+      if (this.state.downlinkChart === 'week') { this.getDownlink('week') }})
+  }
+
+  updateRouter4 = () => {
+    this.setState({     
+      yma: 30,
+      ymb: 60,
+      ymc: 90,
+      ymd: 120,
+      yme: 150,
+      ymf: 180,
+      ymg: 210,
+      id: 1,
+      }, function() {this.setState({         lastvar: this.state.downlink.length - 5,
+        lastvar2: this.state.uplink.length - 5,
+        lastvar3: this.state.modem.length - 5}); if (this.state.uplinkChart === 'week') { this.getUplink('week') }
+      if (this.state.downlinkChart === 'week') { this.getDownlink('week') }})
+  }
+
+  updateRouter5 = () => {
+    this.setState({     
+      yma: 31,
+      ymb: 61,
+      ymc: 91,
+      ymd: 121,
+      yme: 151,
+      ymf: 181,
+      ymg: 211,
+      id: 2,
+      }, function() {this.setState({         lastvar: this.state.downlink.length - 4,
+        lastvar2: this.state.uplink.length - 4,
+        lastvar3: this.state.modem.length - 4}); if (this.state.uplinkChart === 'week') { this.getUplink('week') }
       if (this.state.downlinkChart === 'week') { this.getDownlink('week') }})
   }
 
@@ -382,6 +390,12 @@ testfunc() {
         break;
       case 'm3':
         this.updateRouter3();
+        break;
+      case 'm4':
+        this.updateRouter4();
+        break;
+      case 'm5':
+        this.updateRouter5();
         break;
     
       default:
@@ -524,6 +538,8 @@ testfunc() {
                     <Picker.Item label="Desa Aek Bonban" value="m1" />
                     <Picker.Item label="Desa Jenggala" value="m2" />
                     <Picker.Item label="Kantor Desa Lasara Idanoi" value="m3" />
+                    <Picker.Item label="Kantor Desa Bumi Hantatai" value="m4" />
+                    <Picker.Item label="Kantor Desa Mutar Alam" value="m5" />
                 </Picker>
           </View>
 
