@@ -60,6 +60,10 @@ export default class Cardform extends Component {
                             <Text style={styles.value}>{this.props.data.beam ? this.props.data.beam : '-'}</Text>
                         </View>
                         <View style={styles.field}>
+                            <Text style={styles.key}>Teknisi</Text>
+                            <Text style={styles.value}>{this.props.data.name}</Text>
+                        </View>
+                        <View style={styles.field}>
                             <TouchableOpacity style = {[styles.button, {marginTop: 10}]} onPress={() => this.handleDownloadForm(this.props.data.kode)}>
                                 <Text style = {styles.buttonText}>Download Form</Text>    
                             </TouchableOpacity>

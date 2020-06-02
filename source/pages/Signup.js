@@ -19,9 +19,9 @@ class Signup extends Component {
     constructor() {
       super();
       this.state = {
-        longname: '',
-        email: '',
-        password: '',
+        longname: "",
+        email: "",
+        user_password: "",
         loading: false,
         disabled: false
       };
@@ -56,7 +56,14 @@ class Signup extends Component {
 
 
     insertNewUser = () => {
-      let data = {
+      if (this.state.longname, this.state.email,this.state.user_password === "" ) {
+        alert  ('Field is Required!');
+      } else
+      if ( this.state.user_password.length <8 ){
+       alert ('Password too short!');
+      }
+      else {
+      const data = {
         name: this.state.longname,
         email: this.state.email,
         password: this.state.user_password,
@@ -64,7 +71,7 @@ class Signup extends Component {
         token: API_config.token
     }
     this.props.postUser(data);
-
+    }
       // this.setState({ loading: true, disabled: true }, () =>
       // {
       //   fetch(`${API_config.url}/api/auth/signup`,
@@ -100,6 +107,7 @@ class Signup extends Component {
         <View>
           <InputText
             onChangeText={onChange}
+            minLength={8}
             maxLength={maxLength}
             placeholder={placeholder}
             keyboardType={keyboardType}
@@ -116,10 +124,12 @@ class Signup extends Component {
       console.log(this.props)
         const { navigate } = this.props.navigation;
         return(
-          <KeyboardAvoidingView style= {styles.container}>
-            <ScrollView>
+          <ScrollView style={{ backgroundColor: '#002171'}}>
+            <KeyboardAvoidingView 
+            behavior={Platform.select({ android: 'padding', ios: 'padding' })}
+            style={{ flex: 1}}>
             <View style= {styles.container}>
-                <Image style = {{marginTop:30}}source = {require('../images/Logo-OSS-400.png')}/>
+                <Image style = {{marginTop:5}}source = {require('../images/Logo-OSS-400.png')}/>
 
                 <View style = {styles.boxinput}>
                   <TextInput
@@ -169,8 +179,8 @@ class Signup extends Component {
                     </TouchableOpacity>
                 </View>
             </View>
-            </ScrollView>
           </KeyboardAvoidingView>
+        </ScrollView>
         )
     }
 }
@@ -203,7 +213,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     //alignItems: 'flex-end',
     justifyContent: 'center',
-    paddingVertical: 80,
+    paddingVertical: 20,
     flexDirection:'row'
   },
   signupText:{

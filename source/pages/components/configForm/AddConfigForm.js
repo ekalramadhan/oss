@@ -75,6 +75,9 @@ class ConfigurationForm extends React.Component {
         this.setState(initialState)
     }
     handleSave = () => {
+        if (this.state.lokasi,this.state.tanggalpemasangan,this.state.namapelanggan,this.state.modem,this.state.beam === ""){
+        alert ('Field is required!');
+        } else {
         const data = {
             user_id: this.props.user.id,
             lokasi: this.state.lokasi,
@@ -85,8 +88,8 @@ class ConfigurationForm extends React.Component {
             token: API_config.token
         }
         this.props.addConfigForm(data);
+        }
     }
-
     render() {
         //const {navigate} = this.props.navigation;
         return (

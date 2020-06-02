@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, AsyncStorage, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, AsyncStorage, ActivityIndicator, Linking } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import { Block, Card, Text, Icon, Label } from '../components';
 import Logo from '../components/Logo';
@@ -36,6 +36,9 @@ class Login extends Component {
   }
   Signup() {
     this.props.navigation.navigate('SignupMenu');
+  }
+  handleForgotPassword = () => {
+    Linking.openURL('http://taoss.xyz/oss/auth/forgotpassword')
   }
   UserLoginFunction = () => {
     const data = {
@@ -100,10 +103,12 @@ class Login extends Component {
   render() {
       const {navigate} = this.props.navigation;
       return(
-            <KeyboardAvoidingView style= {styles.container}>
-              <ScrollView>
-              <View style = {styles.container}>
-                <Image style = {{marginTop:30}} source = {require('../images/Logo-OSS-400.png')}/>
+        <ScrollView style={{ backgroundColor: '#002171'}}>
+            <KeyboardAvoidingView 
+            behavior={Platform.select({ android: 'padding', ios: 'padding' })}
+            style={{ flex: 1}}>
+             <View style = {styles.container}>
+                <Image style = {{marginTop:5}} source = {require('../images/Logo-OSS-400.png')}/>
                 
                   <View style = {styles.boxinput}>
                     <TextInput
@@ -136,7 +141,11 @@ class Login extends Component {
                     }    
                 </TouchableOpacity>
               
-
+              <View style ={{marginTop :30}}>
+                <TouchableOpacity onPress={()=> this.handleForgotPassword ()}>
+                  <Text style = {styles.signupButton}> Forgot Password? </Text>
+                </TouchableOpacity>
+              </View>  
               <View style = {styles.signupTextBorder}>
                   <Text style = {styles.signupText}> Do not have an account yet? </Text>
                   <TouchableOpacity onPress={()=>navigate('SignupMenu')}>
@@ -144,8 +153,8 @@ class Login extends Component {
                   </TouchableOpacity>
               </View>
             </View>
-            </ScrollView>
-          </KeyboardAvoidingView>
+            </KeyboardAvoidingView>
+        </ScrollView> 
       )
   }
 }
@@ -162,7 +171,7 @@ const styles = StyleSheet.create({
       fontSize: 20,
       //alignItems: 'flex-end',
       justifyContent: 'center',
-      paddingVertical: 80,
+      paddingVertical: 5,
       flexDirection:'row'
     },
     signupText:{
