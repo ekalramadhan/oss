@@ -31,7 +31,12 @@
     "android": {
       "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"],
       "package": "com.TA14.TAOSS",
-      "versionCode": 2 
+      "versionCode": 2,
+       "config": {
+      "googleMaps": {
+        "apiKey": "AIzaSyAa3qFDLSrYeczPOolUFlRK5qSCz4lk7OI"
+        }
+      }
     }
   }
 }
