@@ -700,8 +700,6 @@ testfunc() {
               </TouchableOpacity>
             </View>
           </Card>
-
-
         </ScrollView>
       </SafeAreaView>
     )
